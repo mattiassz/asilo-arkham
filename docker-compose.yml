@@ -1,0 +1,12 @@
+version: "3.2"
+services:
+  postgres:
+    image: postgres:15
+    ports:
+      - "127.0.0.1:3000:3000"  
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=database
+    volumes:
+      - "/var/lib/postgresql/data" 
