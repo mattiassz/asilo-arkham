@@ -3,10 +3,10 @@ services:
   postgres:
     image: postgres:15
     ports:
-      - "127.0.0.1:3000:3000"  
+      - "127.0.0.1:3000:5432"  
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=database
+      - POSTGRES_DB=batman
     volumes:
       - "/var/lib/postgresql/data" 
