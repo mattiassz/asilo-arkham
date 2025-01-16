@@ -12,9 +12,24 @@ app.get('/', (req, res) => {
   res.send('Arkham Asylum')
 })
 
-app.get('/api/912/delitos', async (req, res) => {
+app.get('/api/v912/delitos', async (req, res) => {
   const delitos = await prisma.delito.findMany()
   res.json(delitos)
+})
+
+//ver delito
+app.get('/api/v912/delitos/:id', async (req, res) => {
+
+  const delito = await prisma.delito.findUnique({
+      where: {
+          id : parseInt(req.params.id)
+      }
+  })
+  if (delito === null) {
+      res.sendStatus(404)
+      return
+  }
+  res.json(delito)
 })
 
 //crear delitos
@@ -32,6 +47,31 @@ app.post('/api/v912/delitos', async (req, res) => {
   })
   res.status(201).send(delito)
 })
+
+app.delete('/api/v912/delitos/:id', async (req, res) => {
+
+  const delito = await prisma.delito.findUnique ({
+      where: {
+          id: parseInt(req.params.id)
+      }
+  })
+
+  if (delito === null) {
+      res.sendStatus(404)
+      return
+  }
+
+  await prisma.delito.delete({
+      where: {
+          id: parseInt(req.params.id)
+      }
+  })
+
+  res.send(delito)
+
+})
+
+
 
 app.listen(port, () => {
   console.log(`Arkham app listening on port ${port}`)
