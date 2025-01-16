@@ -1,7 +1,9 @@
 cd backend
 
-npm init -y
+docker compose up -d
 
-npm install express --save
+npm install 
 
-node app.js
+npx prisma migrate dev
+
+npm run dev
