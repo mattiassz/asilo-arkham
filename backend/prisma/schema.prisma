@@ -12,3 +12,47 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Criminal {
+
+  id Int @id @default(autoincrement())
+  nombre String
+  apodo String
+  edad Int
+  genero String
+  crimen String
+  tratamientoActual String
+  celdaAsignada Int
+  fechaIngreso DateTime
+  nivelRiesgo String
+  foto String?
+}
+
+model Delito {
+  id Int @id @default(autoincrement())
+  tipoDelito String
+  descripcion String
+  fechaCrimen DateTime
+  sentenciaJudicial String
+  lugarDelito String
+  estadoCrimen String
+  nivelPrioridad String
+
+
+  
+  
+}
+
+model Prision {
+  id Int @id @default(autoincrement())
+  tipoCelda String
+  descripcionCelda String
+  nivelSeguridad String
+  camarasSeguridad Int
+  sensoresMovimiento Boolean
+  alarmas Boolean
+  criminalAsignado String
+}
+
+
+
