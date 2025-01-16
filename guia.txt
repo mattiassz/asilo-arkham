@@ -44,7 +44,7 @@ docker compose up -d
 docker exec -it database /bin/bash
 5)acceder  a postgressql
 psql -U intro -d dragonball
-
+psql -U batman -d arkham_asylum 
 
 
 
