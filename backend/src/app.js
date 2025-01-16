@@ -12,6 +12,7 @@ app.get('/', (req, res) => {
   res.send('Arkham Asylum')
 })
 
+//ver todos los delitos
 app.get('/api/v912/delitos', async (req, res) => {
   const delitos = await prisma.delito.findMany()
   res.json(delitos)
@@ -32,7 +33,7 @@ app.get('/api/v912/delitos/:id', async (req, res) => {
   res.json(delito)
 })
 
-//crear delitos
+//crear delito
 app.post('/api/v912/delitos', async (req, res) => {
   const delito = await prisma.delito.create({
       data: {
@@ -48,6 +49,7 @@ app.post('/api/v912/delitos', async (req, res) => {
   res.status(201).send(delito)
 })
 
+//eliminar delito
 app.delete('/api/v912/delitos/:id', async (req, res) => {
 
   const delito = await prisma.delito.findUnique ({
@@ -67,6 +69,39 @@ app.delete('/api/v912/delitos/:id', async (req, res) => {
       }
   })
 
+  res.send(delito)
+
+})
+
+//actualizar, modificar delito
+
+app.put('/api/v912/delitos/:id', async (req, res) => {
+
+  let delito = await prisma.delito.findUnique({
+      where: {
+          id: parseInt(req.params.id)
+      }
+  })
+
+  if (delito === null) {
+      res.sendStatus(404)
+      return
+  }
+
+  delito = await prisma.delito.update({
+      where: {
+          id: delito.id
+      },
+      data: {
+        tipoDelito: req.body.tipoDelito,
+        descripcion: req.body.descripcion,
+        fechaCrimen: new Date(req.body.fechaCrimen),
+        sentenciaJudicial: req.body.sentenciaJudicial,
+        lugarDelito: req.body.lugarDelito,
+        estadoCrimen: req.body.estadoCrimen,
+        nivelPrioridad: req.body.nivelPrioridad
+      }    
+  })
   res.send(delito)
 
 })
