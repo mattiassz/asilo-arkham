@@ -1,0 +1,26 @@
+meta {
+  name: añadir criminal
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:3000/api/v912/criminales
+  body: json
+  auth: none
+}
+
+body:json {
+    {
+      "nombre": "Harleen Quinzel",
+      "apodo": "Harley Quinn",
+      "edad": 33,
+      "genero": "Femenino",
+      "delito": "Asociación ilícita, robo a mano armada, asesinato",
+      "tratamientoActual": "Terapia grupal de control emocional",
+      "celdaAsignada": 2,
+      "fechaIngreso": "2025-01-05T15:00:00.000Z",
+      "nivelRiesgo": "Medio",
+      "foto": "harley_quinn.png"
+    }
+}

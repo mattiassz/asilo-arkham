@@ -1,0 +1,23 @@
+meta {
+  name: añadir celda
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:3000/api/v912/celdas
+  body: json
+  auth: none
+}
+
+body:json {
+    {
+      "tipoCelda": "Inflamable",
+      "descripcionCelda": "Celda de aislamiento para criminales de alto riesgo",
+      "nivelSeguridad": "Muy alto",
+      "camarasSeguridad": 0,
+      "sensoresMovimiento": true,
+      "alarmas": true,
+      "criminalAsignado": "jocker"
+    }
+}

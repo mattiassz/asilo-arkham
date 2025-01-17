@@ -1,0 +1,27 @@
+meta {
+  name: actualizar celda
+  type: http
+  seq: 5
+}
+
+put {
+  url: http://localhost:3000/api/v912/celdas/:id
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 2
+}
+
+body:json {
+    {
+      "tipoCelda": "INFUGABLE",
+      "descripcionCelda": "Celda de aislamiento para criminales de alto riesgo",
+      "nivelSeguridad": "Alto",
+      "camarasSeguridad": 2,
+      "sensoresMovimiento": true,
+      "alarmas": true,
+      "criminalAsignado": "jocker"
+    }
+}
