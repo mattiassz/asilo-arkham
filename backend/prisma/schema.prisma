@@ -23,7 +23,7 @@ model Criminal {
   crimen String
   tratamientoActual String
   celdaAsignada Int
-  fechaIngreso DateTime
+  fechaIngreso String
   nivelRiesgo String
   foto String?
 }
@@ -32,7 +32,7 @@ model Delito {
   id Int @id @default(autoincrement())
   tipoDelito String
   descripcion String
-  fechaCrimen DateTime
+  fechaCrimen String
   sentenciaJudicial String
   lugarDelito String
   estadoCrimen String

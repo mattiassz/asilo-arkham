@@ -1,6 +1,16 @@
-Para iniciar el BACKEND
+Iniciar BACKEND
 
-1) correr el script init.sh con:
+1) Ir a la carpeta backend 
+2) crear un archivo .env 
+3) añadir una cadena de conexion (guiarse con el ejemplo en del archivo example.env)
+
+Debe guiarse por el compose.yml para obtener: usuario, contraseña, database y puerto
+Ejemplo de como deberia quedar:
+DATABASE_URL="postgresql://manolo:manolo1234@localhost:8888/supermanolo"
+
+4) salir de la carpeta backend y ejecutar el script
+
+5) correr el script init.sh con:
 bash init.sh
 
 

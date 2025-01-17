@@ -39,7 +39,7 @@ app.post('/api/v912/delitos', async (req, res) => {
       data: {
           tipoDelito: req.body.tipoDelito,
           descripcion: req.body.descripcion,
-          fechaCrimen: new Date(req.body.fechaCrimen),
+          fechaCrimen: req.body.fechaCrimen,
           sentenciaJudicial: req.body.sentenciaJudicial,
           lugarDelito: req.body.lugarDelito,
           estadoCrimen: req.body.estadoCrimen,
@@ -95,7 +95,7 @@ app.put('/api/v912/delitos/:id', async (req, res) => {
       data: {
         tipoDelito: req.body.tipoDelito,
         descripcion: req.body.descripcion,
-        fechaCrimen: new Date(req.body.fechaCrimen),
+        fechaCrimen: req.body.fechaCrimen,
         sentenciaJudicial: req.body.sentenciaJudicial,
         lugarDelito: req.body.lugarDelito,
         estadoCrimen: req.body.estadoCrimen,
