@@ -1,0 +1,23 @@
+meta {
+  name: actualizar delito
+  type: http
+  seq: 5
+}
+
+put {
+  url: http://localhost:3000/api/v912/delitos/:id
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 2
+}
+
+body:json {
+  {
+  
+      "fechaDelito": "2023-07-20"
+  
+    }
+}
