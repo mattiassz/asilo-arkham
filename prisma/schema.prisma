@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -14,7 +8,7 @@ datasource db {
 }
 
 model Criminal {
-  id            Int    @id @default(autoincrement()) //@para q sea primary key y autoincrementa
+  id            Int    @id @default(autoincrement())  // Primary key autoincremental
   name          String
   alias         String
   crime         String
@@ -22,4 +16,17 @@ model Criminal {
   sex           String
   treatment     String
   dangerousness String
+  staff_asigned Int    // Foreign key que se relaciona con Staff.dni
+
+  staff         Staff  @relation(fields: [staff_asigned], references: [dni]) // Relación con Staff
+}
+
+model Staff {
+  dni           Int    @id  // Primary key
+  name          String
+  rol           String
+  shift         String
+  contact      Int
+
+  criminals     Criminal[]  // Relación inversa con Criminal
 }

@@ -1,6 +1,6 @@
 {
   "version": "1",
-  "name": "Batman",
+  "name": "Batman-Query",
   "type": "collection",
   "ignore": [
     "node_modules",

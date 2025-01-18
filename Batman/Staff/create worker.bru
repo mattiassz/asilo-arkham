@@ -1,0 +1,21 @@
+meta {
+  name: create worker
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://localhost:3002/api/v1/staff
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "dni": 45077527,
+    "name": "PEdro PEDRIN",
+    "rol": "Guardia MAÑANERO",
+    "shift": "NOCTURNO" ,
+    "contact": 1558887482
+  }
+}
