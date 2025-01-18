@@ -11,14 +11,13 @@ model Criminal {
   id            Int    @id @default(autoincrement())  // Primary key autoincremental
   name          String
   alias         String
-  crime         String
   age           Int
   sex           String
   treatment     String
   dangerousness String
   staff_asigned Int    // Foreign key que se relaciona con Staff.dni
-
   staff         Staff  @relation(fields: [staff_asigned], references: [dni]) // Relación con Staff
+  crimes        Crimes[]
 }
 
 model Staff {
@@ -29,4 +28,23 @@ model Staff {
   contact      Int
 
   criminals     Criminal[]  // Relación inversa con Criminal
+
+}
+
+
+// Campos:
+// - nombre delito (asalto, homicidio, robo, etc.)
+// - descripción (descripción detallada del delito)
+// - fecha cometido
+// - sentencia (sentencia judicial)
+// - criminal_id (clave foránea a criminal)
+
+model Crimes {
+
+  criminal_id       Int   //foreign key
+  crime_number      Int @id
+  description       String
+  date              String 
+  court_ruling      String
+  Criminal         Criminal  @relation(fields: [criminal_id], references: [id])
 }
