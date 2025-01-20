@@ -15,9 +15,11 @@ model Criminal {
   sex           String
   treatment     String
   dangerousness String
-  staff_asigned Int    // Foreign key que se relaciona con Staff.dni
+  staff_asigned Int   // Foreign key que se relaciona con Staff.dni
+  jail          Int
   staff         Staff  @relation(fields: [staff_asigned], references: [dni]) // Relación con Staff
   crimes        Crimes[]
+  jails         Jails @relation(fields: [jail], references: [jail_number])
 }
 
 model Staff {
@@ -25,26 +27,27 @@ model Staff {
   name          String
   rol           String
   shift         String
-  contact      Int
-
+  contact       Int
   criminals     Criminal[]  // Relación inversa con Criminal
 
 }
 
 
-// Campos:
-// - nombre delito (asalto, homicidio, robo, etc.)
-// - descripción (descripción detallada del delito)
-// - fecha cometido
-// - sentencia (sentencia judicial)
-// - criminal_id (clave foránea a criminal)
-
 model Crimes {
 
   criminal_id       Int   //foreign key
-  crime_number      Int @id //pk
+  crime_number      Int @id @default(autoincrement())//pk
   description       String
   date              String 
   court_ruling      String
   Criminal         Criminal  @relation(fields: [criminal_id], references: [id])
+}
+
+
+model Jails {
+  jail_number      Int @id @default(autoincrement())
+  floor            Int
+  capacity         Int
+  criminals        Criminal[]
+  
 }

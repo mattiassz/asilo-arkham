@@ -51,6 +51,19 @@ app.post('/api/v1/criminals', async (req, res) => {
         return
     }
 
+    let jail = await prisma.jails.findUnique({
+        where: {
+            jail_number: parseInt(req.body.jail)
+        }
+    })
+
+    if (jail === null){
+        res.send(404)
+        return
+    }
+
+
+
     const criminal = await prisma.criminal.create({
         data: {
             name: req.body.name,
@@ -59,7 +72,8 @@ app.post('/api/v1/criminals', async (req, res) => {
             sex: req.body.sex,
             treatment: req.body.treatment,
             dangerousness: req.body.dangerousness,
-            staff_asigned: req.body.staff_asigned
+            staff_asigned: req.body.staff_asigned,
+            jail: req.body.jail
 
         }
     })
@@ -94,23 +108,44 @@ app.put('/api/v1/criminals/:id', async (req,res)=> {
             id: parseInt(req.params.id)
         }
     })
-    if(criminal===null){ // -1 es igual a que no lo encontró
+    if(criminal === null){ 
         res.sendStatus(404)
         return
     }
+
+    let jail = prisma.jails.findUnique({
+        where: {
+            jail_number: parseInt(req.body.jail)
+        }
+    })
+    if (jail ===null){
+        res.send(404)
+        return
+    }
+
+    let staff = prisma.staff.findUnique({
+        where: {
+            dni: parseInt(req.body.staff_asigned)
+        }
+    })
+    if (staff === null){
+        res.send(404)
+        return
+    }
+
     await prisma.criminal.update({
         where: {
-            id: criminal.id
+            id: parseInt(req.params.id)
         },
         data: {
             name: req.body.name,
             alias: req.body.alias,
-            crime: req.body.crime,
             age: req.body.age,
             sex: req.body.sex,
             treatment: req.body.treatment,
             dangerousness: req.body.dangerousness,
-            staff_asigned: req.body.staff_asigned
+            staff_asigned: req.body.staff_asigned,
+            jail: req.body.jail
             //si le paso undefined, no me lo modifica
         }
     })
@@ -286,6 +321,19 @@ app.put('/api/v1/crimes/:crime_number', async (req,res)=>{
         res.send(404)
         return
     }
+
+    let criminal = await prisma.criminal.findUnique({
+        where: {
+            id: req.body.criminal_id
+        }
+    })
+    if (criminal === null){
+        res.send(404)
+        return
+    }
+
+
+
     await prisma.crimes.update({
         where: {
             crime_number: req.params.crime_number
@@ -300,6 +348,82 @@ app.put('/api/v1/crimes/:crime_number', async (req,res)=>{
     })
 
     res.send(crime)
+})
+
+
+
+
+///////////////////////////// Cárceles  /////////////////////////////
+
+
+app.get('/api/v1/jails', async (req, res)=>{
+    const jails = await prisma.jails.findMany()
+    res.send(jails)
+})
+
+
+app.get('/api/v1/jails/:jail_number', async (req, res)=>{
+    const jail = await prisma.jails.findUnique({
+        where: {
+            jail_number: req.params.jail_number
+        }
+    })
+    if (jail === null) {
+        res.send(404)
+        return
+    }
+    res.send(jails)
+})
+
+app.delete('/api/v1/jails/:jail_number', async (req,res)=>{
+    const jail = await prisma.jails.findUnique({
+        where: {
+            jail_number: req.params.jail_number
+        }
+    })
+    if (jail === null) {
+        res.send(404)
+        return
+    }
+    await prisma.jails.delete({
+        where: {
+            jail_number: req.params.jail_number
+        }
+    })
+})
+
+
+app.put('/api/v1/jails/:jail_number', async (req,res)=>{
+    const jail = await prisma.jails.findUnique({
+        where: {
+            jail_number: req.params.jail_number
+        }
+    })
+    if (jail === null) {
+        res.send(404)
+        return
+    }
+
+
+    await prisma.jails.update({
+        where: {
+            jail_number: req.params.jail_number
+        },
+        data: {
+            floor: req.body.floor,
+            capacity: req.body.capacity
+        }
+    })
+})
+
+
+app.post('/api/v1/jails', async (req,res)=>{
+    const criminal = await prisma.jails.create({
+        data: {
+            floor: req.body.floor,
+            capacity: req.body.capacity
+        }
+    })
 })
 
 
