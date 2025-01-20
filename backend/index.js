@@ -18,7 +18,7 @@ app.get("/", (req,res)=>{
 
 
 app.get('/api/v1/criminals', async (req,res)=>{
-    const criminales = await prisma.criminal.findMany() //findMany = SELECT * FROM DB
+    const criminales = await prisma.criminal.findMany() //findMany = SELECT * FROM DBG
     res.send(criminales)
 })
 
@@ -39,11 +39,22 @@ app.get('/api/v1/criminals/:id', async (req,res)=>{
 
 
 app.post('/api/v1/criminals', async (req, res) => {
+
+    let staff = await prisma.staff.findUnique({
+        where: {
+            dni: parseInt(req.body.staff_asigned)
+        }
+    })
+
+    if (staff === null){
+        res.send(404)
+        return
+    }
+
     const criminal = await prisma.criminal.create({
         data: {
             name: req.body.name,
             alias: req.body.alias,
-            crime: req.body.crime,
             age: req.body.age,
             sex: req.body.sex,
             treatment: req.body.treatment,
@@ -53,7 +64,7 @@ app.post('/api/v1/criminals', async (req, res) => {
         }
     })
 
-    res.status(201).json(criminal); // Devolvemos el usuario creado
+    res.status(201).send(criminal); // Devolvemos el usuario creado
 })
 
 
@@ -109,7 +120,7 @@ app.put('/api/v1/criminals/:id', async (req,res)=> {
 
 
 
-///////////////////////////////////    API DE STAFF    /////////////////////////////////////
+///////////////////////////////////    STAFF    /////////////////////////////////////
 
 
 
@@ -195,6 +206,103 @@ app.put('/api/v1/staff/:dni', async (req,res)=> {  //modificar alguien del staff
     res.send(worker)
 
 })
+
+
+
+/////////////////////////////////////  CRIMES   //////////////////////////////////////////////////////
+
+
+
+app.get('/api/v1/crimes', async (req,res)=>{
+    const crimes = await prisma.crimes.findMany()
+    res.send(crimes)
+})
+
+
+app.get('/api/c1/crimes/:crime_number', async (req,res)=>{
+    const crime = await prisma.crimes.findUnique({
+        where: {
+            crime_number: req.params.crime_number
+        }
+    })
+    if (crime === null){
+        res.sendStatus(404)
+        return
+    }
+    res.send(crime)
+})
+
+
+app.post('/api/v1/crimes', async (req,res)=>{
+    let criminal = await prisma.criminal.findUnique({ 
+        where: {
+            id: req.body.criminal_id
+        }
+        
+    })
+    if (criminal === null){  //validación
+        res.send(404)
+        return
+    }
+
+    let crime = await prisma.crimes.create({
+        data: {
+            criminal_id: req.body.criminal_id,
+            crime_number: req.body.crime_number,
+            description: req.body.description,
+            date: req.body.date,
+            court_ruling: req.body.court_ruling
+
+        }
+    })
+    res.send(crime)
+})
+
+app.delete('/api/v1/crimes/:crime_number', async  (res,req)=>{
+    const crime = await prisma.crimes.findUnique({
+        where: {
+            crime_number: req.params.crime_number
+        }
+    })
+    if (crime === null){
+        res.sendStatus(404)
+        return
+    }
+    await prisma.crimes.delete({
+        where: {
+            crime_number: req.params.crime_number
+        },    
+    })
+    res.send(crime)
+})
+
+app.put('/api/v1/crimes/:crime_number', async (req,res)=>{
+    const crime = await prisma.crimes.findUnique({
+        where: {
+            crime_number: req.params.crime_number
+        },
+    })
+    if (crime === null){
+        res.send(404)
+        return
+    }
+    await prisma.crimes.update({
+        where: {
+            crime_number: req.params.crime_number
+        },
+        data: {
+            criminal_id: req.body.criminal_id,
+            crime_number: req.body.crime_number,
+            description: req.body.description,
+            date: req.body.date,
+            court_ruling: req.body.court_ruling,
+        }
+    })
+
+    res.send(crime)
+})
+
+
 
 
 

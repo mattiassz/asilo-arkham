@@ -42,7 +42,7 @@ model Staff {
 model Crimes {
 
   criminal_id       Int   //foreign key
-  crime_number      Int @id
+  crime_number      Int @id //pk
   description       String
   date              String 
   court_ruling      String

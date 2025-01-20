@@ -1,0 +1,21 @@
+meta {
+  name: create crime
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://localhost:3002/api/v1/crimes
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "criminal_id": 1,
+    "crime_number": 41790,
+    "description": "se la re mando",
+    "date": "10-10-2004",
+    "court_ruling": "30 años de trabajos forzados"
+    }
+}
