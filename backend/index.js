@@ -1,5 +1,7 @@
 const express = require('express')
+var cors = require('cors')
 const app = express()
+app.use(cors())
 const port = 3002;
 
 const { PrismaClient } = require('@prisma/client')
@@ -112,26 +114,30 @@ app.put('/api/v1/criminals/:id', async (req,res)=> {
         res.sendStatus(404)
         return
     }
-
-    let jail = prisma.jails.findUnique({
-        where: {
-            jail_number: parseInt(req.body.jail)
+    if (req.body.jail_number !== null){
+        let jail = await prisma.jails.findUnique({
+            where: {
+                jail_number: parseInt(req.body.jail)
+            }
+        })
+        if (jail === null){
+            res.sendStatus(404)
+            return
         }
-    })
-    if (jail ===null){
-        res.send(404)
-        return
     }
-
-    let staff = prisma.staff.findUnique({
-        where: {
-            dni: parseInt(req.body.staff_asigned)
+    
+    if ( req.body.staff_asigned !== null){
+        let staff = await prisma.staff.findUnique({
+            where: {
+                dni: parseInt(req.body.staff_asigned)
+            }
+        })
+        if (staff === null){
+            res.send(404)
+            return
         }
-    })
-    if (staff === null){
-        res.send(404)
-        return
     }
+    
 
     await prisma.criminal.update({
         where: {
@@ -269,13 +275,12 @@ app.get('/api/c1/crimes/:crime_number', async (req,res)=>{
 
 
 app.post('/api/v1/crimes', async (req,res)=>{
-    let criminal = await prisma.criminal.findUnique({ 
+    let crime_number = await prisma.criminal.findUnique({ 
         where: {
             id: req.body.criminal_id
-        }
-        
+        },
     })
-    if (criminal === null){  //validación
+    if (crime === null){  //validación
         res.send(404)
         return
     }
@@ -283,21 +288,20 @@ app.post('/api/v1/crimes', async (req,res)=>{
     let crime = await prisma.crimes.create({
         data: {
             criminal_id: req.body.criminal_id,
-            crime_number: req.body.crime_number,
             description: req.body.description,
             date: req.body.date,
             court_ruling: req.body.court_ruling
-
         }
     })
     res.send(crime)
 })
 
 app.delete('/api/v1/crimes/:crime_number', async  (res,req)=>{
-    const crime = await prisma.crimes.findUnique({
+
+    let crime = await prisma.crimes.findUnique({
         where: {
-            crime_number: req.params.crime_number
-        }
+            crime_number: parseInt(req.params.crime_number)
+        },
     })
     if (crime === null){
         res.sendStatus(404)
@@ -314,25 +318,26 @@ app.delete('/api/v1/crimes/:crime_number', async  (res,req)=>{
 app.put('/api/v1/crimes/:crime_number', async (req,res)=>{
     const crime = await prisma.crimes.findUnique({
         where: {
-            crime_number: req.params.crime_number
+            crime_number: parseInt(req.params.crime_number)
         },
     })
     if (crime === null){
-        res.send(404)
+        res.sendStatus(404)
         return
     }
 
-    let criminal = await prisma.criminal.findUnique({
-        where: {
-            id: req.body.criminal_id
+
+    if (req.body.criminal_id !== null){
+        let criminal = await prisma.criminal.findUnique({
+            where: {
+                id: req.body.criminal_id
+            }
+        })
+        if (criminal === null){
+            res.sendStatus(404)
+            return
         }
-    })
-    if (criminal === null){
-        res.send(404)
-        return
     }
-
-
 
     await prisma.crimes.update({
         where: {
@@ -365,20 +370,20 @@ app.get('/api/v1/jails', async (req, res)=>{
 app.get('/api/v1/jails/:jail_number', async (req, res)=>{
     const jail = await prisma.jails.findUnique({
         where: {
-            jail_number: req.params.jail_number
+            jail_number: parseInt(req.params.jail_number)
         }
     })
     if (jail === null) {
         res.send(404)
         return
     }
-    res.send(jails)
+    res.send(jail)
 })
 
 app.delete('/api/v1/jails/:jail_number', async (req,res)=>{
     const jail = await prisma.jails.findUnique({
         where: {
-            jail_number: req.params.jail_number
+            jail_number: parseInt(req.params.jail_number)
         }
     })
     if (jail === null) {
@@ -387,16 +392,17 @@ app.delete('/api/v1/jails/:jail_number', async (req,res)=>{
     }
     await prisma.jails.delete({
         where: {
-            jail_number: req.params.jail_number
+            jail_number: parseInt(req.params.jail_number)
         }
     })
+    res.send(jail)
 })
 
 
 app.put('/api/v1/jails/:jail_number', async (req,res)=>{
-    const jail = await prisma.jails.findUnique({
+    let jail = await prisma.jails.findUnique({
         where: {
-            jail_number: req.params.jail_number
+            jail_number: parseInt(req.params.jail_number)
         }
     })
     if (jail === null) {
@@ -407,23 +413,25 @@ app.put('/api/v1/jails/:jail_number', async (req,res)=>{
 
     await prisma.jails.update({
         where: {
-            jail_number: req.params.jail_number
+            jail_number: parseInt(req.params.jail_number)
         },
         data: {
             floor: req.body.floor,
             capacity: req.body.capacity
         }
     })
+    res.send(jail)
 })
 
 
 app.post('/api/v1/jails', async (req,res)=>{
-    const criminal = await prisma.jails.create({
+    const jail = await prisma.jails.create({
         data: {
             floor: req.body.floor,
             capacity: req.body.capacity
         }
     })
+    res.send(jail)
 })
 
 

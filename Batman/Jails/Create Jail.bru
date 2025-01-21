@@ -1,0 +1,18 @@
+meta {
+  name: Create Jail
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:3002/api/v1/jails
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "floor": -2,
+    "capacity": 1
+  }
+}
