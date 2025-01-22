@@ -100,4 +100,3 @@ Modelo de vistas del proyecto de Arkham
        - capacidad maxima
    - Interacción con el usuario: a definir
 ---
-
