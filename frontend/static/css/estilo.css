@@ -161,6 +161,11 @@ nav ul li a:focus {
     box-shadow: 0 0 8px rgba(0, 188, 212, 0.7);
 }
 
+.cargar a:hover {
+    color: #ffffff; 
+    background-color: #00e676;
+}
+
 main {
     margin-top: 50px;
     padding: 60px 0 40px 0;
