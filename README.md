@@ -1,2 +1,1 @@
-# arkham-TP-introCamejo
-TP grupal para intro al desarrollo del software
+correr el comando $npm run dev para correr nodemon

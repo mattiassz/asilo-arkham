@@ -1,0 +1,21 @@
+meta {
+  name: create worker
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://localhost:3002/api/v1/staff
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "dni": 30696285,
+    "name": "Marta maria",
+    "rol": "Guardia",
+    "shift": "NOCTURNO" ,
+    "contact": 312214532
+  }
+}

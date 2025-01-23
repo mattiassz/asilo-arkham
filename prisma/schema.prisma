@@ -1,0 +1,53 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Criminal {
+  id            Int    @id @default(autoincrement())  // Primary key autoincremental
+  name          String
+  alias         String
+  age           Int
+  sex           String
+  treatment     String
+  dangerousness String
+  staff_asigned Int   // Foreign key que se relaciona con Staff.dni
+  jail          Int
+  staff         Staff  @relation(fields: [staff_asigned], references: [dni]) // Relación con Staff
+  crimes        Crimes[]
+  jails         Jails @relation(fields: [jail], references: [jail_number])
+}
+
+model Staff {
+  dni           Int    @id  // Primary key
+  name          String
+  rol           String
+  shift         String
+  contact       Int
+  criminals     Criminal[]  // Relación inversa con Criminal
+
+}
+
+
+model Crimes {
+
+  criminal_id       Int   //foreign key
+  crime_number      Int @id @default(autoincrement())//pk
+  description       String
+  date              String 
+  court_ruling      String
+  Criminal         Criminal  @relation(fields: [criminal_id], references: [id])
+}
+
+
+model Jails {
+  jail_number      Int @id @default(autoincrement())
+  floor            Int
+  capacity         Int
+  criminals        Criminal[]
+  
+}
