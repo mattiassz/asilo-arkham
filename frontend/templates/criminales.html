@@ -121,6 +121,7 @@
 				tabla.innerHTML = ''; //resetear tabla al momento de borrar un criminal
 				criminales.forEach(criminal => {
 					let tr = document.createElement('tr');
+					tr.id = 'criminal-' + criminal.id;
 	
 					let nombre = document.createElement('td');
 					nombre.textContent = criminal.nombre;  
@@ -176,7 +177,9 @@
 			.then(response => response.json())
 			.then( response => {
 				console.log(response);
-				MostrarCriminales();
+				//MostrarCriminales();
+				let tr = document.getElementById("criminal-" + response.id)
+				tr.remove()
 			})
 
 
