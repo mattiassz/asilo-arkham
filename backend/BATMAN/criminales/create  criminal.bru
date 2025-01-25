@@ -1,0 +1,29 @@
+meta {
+  name: create  criminal
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://localhost:3002/api/v1/criminals
+  body: json
+  auth: none
+}
+
+params:query {
+  : 
+}
+
+body:json {
+  {
+    "name": "pedrin",     
+    "alias": "cacatua",        
+    "age": 55,          
+    "sex": "Fem",          
+    "treatment" : "Antidepresivos", 
+    "dangerousness": "nothing",
+    "staff_asigned": 30696285,
+    "jail": 1
+    
+  }
+}
