@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -14,45 +8,50 @@ datasource db {
 }
 
 model Criminal {
+  id            Int    @id @default(autoincrement())  // Primary key autoincremental
+  nombre        String
+  apodo         String
+  edad          Int
+  genero        String
+  tratamiento   String
+  peligrosidad  String
+  personal_asignado Int  // Foreign key que se relaciona con Staff.dni
+  celda         Int  
+  personal      Personal  @relation(fields: [personal_asignado], references: [dni]) // Relación con Personal
+  delitos       Delito[]  // Relación con Delito
+  celda_info    Celda @relation(fields: [celda], references: [numero_celda]) // Relación con Celda
+}
 
-  id Int @id @default(autoincrement())
-  nombre String
-  apodo String
-  edad Int
-  genero String
-  delito String
-  tratamientoActual String
-  celdaAsignada Int
-  fechaIngreso String
-  nivelRiesgo String
-  foto String?
+model Personal {
+  dni           Int    @id  // Primary key
+  nombre        String
+  rol           String
+  turno         String
+  contacto      Int
+  criminales    Criminal[]  // Relación inversa con Criminal
 }
 
 model Delito {
-  id Int @id @default(autoincrement())
-  tipoDelito String
-  descripcion String
-  fechaDelito String
-  sentenciaJudicial String
-  lugarDelito String
-  estadoDelito String
+  numero_delito Int @id @default(autoincrement())
+  criminal_id   Int  //foreign key
+  descripcion   String
+  fecha         String
+  sentencia_judicial String
+  lugarDelito   String
+  estadoDelito  String
   nivelPrioridad String
-
-
-  
-  
+  criminal      Criminal @relation(fields: [criminal_id], references: [id])
 }
 
 model Celda {
-  id Int @id @default(autoincrement())
-  tipoCelda String
+  numero_celda  Int @id @default(autoincrement())  
+  tipoCelda     String
   descripcionCelda String
   nivelSeguridad String
-  camarasSeguridad Int
+  camarasSeguridad Boolean
   sensoresMovimiento Boolean
-  alarmas Boolean
-  criminalAsignado String
+  alarmas        Boolean
+  piso           Int
+  capacidad      Int
+  criminales     Criminal[] 
 }
-
-
-
