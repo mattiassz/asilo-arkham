@@ -35,9 +35,20 @@
 					</p>
 				</section>
 				<section class="secciones">
-					<p class="titulos">Informacion general</p>
-					lego batman
-
+					<p class="titulos">Personal</p>
+					<table class="tabla-personal">
+						<thead>
+							<tr>
+								<th>DNI</th>
+								<th>Nombre</th>
+								<th>Rol</th>
+								<th>Turno</th>
+								<th>Contacto</th>
+							</tr>
+						</thead>
+						<tbody id="users-data">
+						</tbody>
+					</table>
 				</section>
 			</main>
 
@@ -45,5 +56,40 @@
 				<p>hecho por batman</p>
 			</footer>
 		</div>
+		<script>
+			fetch('http://127.0.0.1:3002/api/v1/personal')
+			.then(response => response.json())
+			.then(personal => {
+				console.log(personal);
+	
+				let tabla = document.getElementById('users-data');
+				personal.forEach(persona => {
+					let tr = document.createElement('tr');
+	
+					let dni = document.createElement('td');
+					dni.textContent = persona.dni;  
+	
+					let nombre = document.createElement('td');
+					nombre.textContent = persona.nombre;
+	
+					let rol = document.createElement('td');
+					rol.textContent = persona.rol;  
+	
+					let turno = document.createElement('td');
+					turno.textContent = persona.turno;  
+	
+					let contacto = document.createElement('td');
+					contacto.textContent = persona.contacto;
+	
+					tr.appendChild(dni);
+					tr.appendChild(nombre);
+					tr.appendChild(rol);
+					tr.appendChild(turno);
+					tr.appendChild(contacto);
+	
+					tabla.appendChild(tr);  
+				});
+			})
+		</script>
 	</body>
 </html>

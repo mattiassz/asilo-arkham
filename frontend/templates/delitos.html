@@ -91,5 +91,12 @@
 				<p>hecho por batman</p>
 			</footer>
 		</div>
+		<script>
+			fetch('http://127.0.0.1:3002/api/v1/delitos')
+			.then(res => res.json())
+			.then(delitos => {
+				console.log(delitos)
+			})
+		</script>
 	</body>
 </html>

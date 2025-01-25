@@ -45,5 +45,28 @@
 				<p>hecho por batman</p>
 			</footer>
 		</div>
+		<script>
+			fetch('http://127.0.0.1:3002/api/v1/celdas')
+			.then(res => res.json())
+			.then(celdas => {
+				console.log(celdas)
+				
+				celdas.forEach( celda => {
+					let tr = document.createElement('tr')
+					let numero_celda = document.createElement('th')
+					numero_celda.textContent = celda.jail_number
+					let piso = document.createElement('th')
+					piso.textContent = celda.floor
+					let capacidad = document.createElement('th')
+					capacidad.textContent = celda.capacity
+					tr.appendChild(numero_celda)
+					tr.appendChild(piso)
+					tr.appendChild(capacidad)
+
+
+
+				})
+			})
+		</script>
 	</body>
 </html>

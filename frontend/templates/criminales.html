@@ -79,5 +79,12 @@
 				<p>hecho por batman</p>
 			</footer>
 		</div>
+		<script>
+			fetch('http://127.0.0.1:3002/api/v1/criminales')
+			.then(res => res.json())
+			.then(criminales => {
+				console.log(criminales)
+			})
+		</script>
 	</body>
 </html>
