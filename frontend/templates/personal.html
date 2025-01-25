@@ -46,7 +46,7 @@
 								<th>Contacto</th>
 							</tr>
 						</thead>
-						<tbody id="users-data">
+						<tbody id="personal-data">
 						</tbody>
 					</table>
 				</section>
@@ -62,7 +62,7 @@
 			.then(personal => {
 				console.log(personal);
 	
-				let tabla = document.getElementById('users-data');
+				let tabla = document.getElementById('personal-data');
 				personal.forEach(persona => {
 					let tr = document.createElement('tr');
 	

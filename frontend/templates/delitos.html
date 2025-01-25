@@ -85,6 +85,27 @@
 						</li>
 					</ul>
 				</section>
+
+				<section class="secciones">
+					<p class="titulos">Delitos</p>
+					<table class="tabla-delitos">
+						<thead>
+							<tr>
+								<th>Criminal n°</th>
+								<th>Descripcion</th>
+								<th>Fecha</th>
+								<th>Sentencia</th>
+								<th>Lugar</th>
+								<th>Estado</th>
+								<th>Prioridad</th>
+
+
+							</tr>
+						</thead>
+						<tbody id="delitos-data">
+						</tbody>
+					</table>
+				</section>
 			</main>
 
 			<footer>
@@ -93,9 +114,47 @@
 		</div>
 		<script>
 			fetch('http://127.0.0.1:3002/api/v1/delitos')
-			.then(res => res.json())
+			.then(response => response.json())
 			.then(delitos => {
-				console.log(delitos)
+				console.log(delitos);
+	
+				let tabla = document.getElementById('delitos-data');
+				delitos.forEach(delito => {
+					let tr = document.createElement('tr');
+	
+					let criminal_id = document.createElement('td');
+					criminal_id.textContent = delito.criminal_id;  
+	
+					let descripcion = document.createElement('td');
+					descripcion.textContent = delito.descripcion;
+	
+					let fecha = document.createElement('td');
+					fecha.textContent = delito.fecha;  
+	
+					let sentencia_judicial = document.createElement('td');
+					sentencia_judicial.textContent = delito.sentencia_judicial;  
+	
+					let lugarDelito = document.createElement('td');
+					lugarDelito.textContent = delito.lugarDelito;
+
+					let estadoDelito = document.createElement('td');
+					estadoDelito.textContent = delito.estadoDelito;
+					
+
+					let nivelPrioridad = document.createElement('td');
+					nivelPrioridad.textContent = delito.nivelPrioridad;
+	
+					tr.appendChild(criminal_id);
+					tr.appendChild(descripcion);
+					tr.appendChild(fecha);
+					tr.appendChild(sentencia_judicial);
+					tr.appendChild(lugarDelito);
+					tr.appendChild(estadoDelito);
+					tr.appendChild(nivelPrioridad);
+ 
+
+					tabla.appendChild(tr);  
+				});
 			})
 		</script>
 	</body>

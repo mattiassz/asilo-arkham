@@ -39,6 +39,31 @@
 					lego batman
 
 				</section>
+
+
+				<section class="secciones">
+					<p class="titulos">Celdas</p>
+					<table class="tabla-celdas">
+						<thead>
+							<tr>
+								<th>Tipo de celda</th>
+								<th>Descripcion</th>
+								<th>Seguridad</th>
+								<th>Cámaras</th>
+								<th>Sensores</th>
+								<th>Alarmas</th>
+								<th>Piso</th>
+								<th>Capacidad</th>
+								<th>Numero de Celda</th>
+
+
+							</tr>s
+						</thead>
+						<tbody id="celdas-data">
+							
+						</tbody>
+					</table>
+				</section>
 			</main>
 
 			<footer>
@@ -51,21 +76,54 @@
 			.then(celdas => {
 				console.log(celdas)
 				
-				celdas.forEach( celda => {
-					let tr = document.createElement('tr')
-					let numero_celda = document.createElement('th')
-					numero_celda.textContent = celda.jail_number
-					let piso = document.createElement('th')
-					piso.textContent = celda.floor
-					let capacidad = document.createElement('th')
-					capacidad.textContent = celda.capacity
-					tr.appendChild(numero_celda)
-					tr.appendChild(piso)
-					tr.appendChild(capacidad)
+				let tabla = document.getElementById('celdas-data');
+				celdas.forEach(celda => {
+					let tr = document.createElement('tr');
+	
+					let tipoCelda = document.createElement('td');
+					tipoCelda.textContent = celda.tipoCelda;  
+	
+					let descripcionCelda = document.createElement('td');
+					descripcionCelda.textContent = celda.descripcionCelda;
+	
+					let nivelSeguridad = document.createElement('td');
+					nivelSeguridad.textContent = celda.nivelSeguridad;  
+	
+					let camarasSeguridad = document.createElement('td');
+					camarasSeguridad.textContent = celda.camarasSeguridad;  
+	
+					let sensoresMovimiento = document.createElement('td');
+					sensoresMovimiento.textContent = celda.sensoresMovimiento;
 
 
+					let alarmas = document.createElement('td');
+					alarmas.textContent = celda.alarmas;
 
-				})
+					let piso = document.createElement('td');
+					piso.textContent = celda.piso;
+
+					let capacidad = document.createElement('td');
+					capacidad.textContent = celda.capacidad;
+
+					let numero_celda = document.createElement('td');
+					numero_celda.textContent = celda.numero_celda;
+
+					
+	
+					tr.appendChild(tipoCelda);
+					tr.appendChild(descripcionCelda);
+					tr.appendChild(nivelSeguridad);
+					tr.appendChild(camarasSeguridad);
+					tr.appendChild(sensoresMovimiento);
+					tr.appendChild(alarmas);
+					tr.appendChild(piso);
+					tr.appendChild(capacidad);
+					tr.appendChild(numero_celda);
+
+
+	
+					tabla.appendChild(tr);  
+				});
 			})
 		</script>
 	</body>

@@ -5,25 +5,21 @@ meta {
 }
 
 post {
-  url: http://localhost:3002/api/v1/criminals
+  url: http://localhost:3002/api/v1/criminales
   body: json
   auth: none
 }
 
-params:query {
-  : 
-}
-
 body:json {
   {
-    "name": "pedrin",     
-    "alias": "cacatua",        
-    "age": 55,          
-    "sex": "Fem",          
-    "treatment" : "Antidepresivos", 
-    "dangerousness": "nothing",
-    "staff_asigned": 30696285,
-    "jail": 1
+    "nombre": "pedrin",     
+    "apodo": "cacatua",        
+    "edad": 55,          
+    "genero": "Fem",          
+    "tratamiento" : "Antidepresivos", 
+    "peligrosidad": "nothing",
+    "personal_asignado": 1122335565,
+    "celda": 1
     
   }
 }
