@@ -77,6 +77,7 @@
 				console.log(celdas)
 				
 				let tabla = document.getElementById('celdas-data');
+				let index = 1;
 				celdas.forEach(celda => {
 					let tr = document.createElement('tr');
 	
@@ -106,7 +107,8 @@
 					capacidad.textContent = celda.capacidad;
 
 					let numero_celda = document.createElement('td');
-					numero_celda.textContent = celda.numero_celda;
+					numero_celda.textContent = index;
+					index++
 
 					
 	

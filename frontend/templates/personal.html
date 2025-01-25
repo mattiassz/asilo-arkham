@@ -44,6 +44,8 @@
 								<th>Rol</th>
 								<th>Turno</th>
 								<th>Contacto</th>
+								<th>Borrar Staff</th>
+
 							</tr>
 						</thead>
 						<tbody id="personal-data">
@@ -80,16 +82,35 @@
 	
 					let contacto = document.createElement('td');
 					contacto.textContent = persona.contacto;
+
+					let borrar = document.createElement('td');
+					let boton = document.createElement('button')
+					boton.textContent = 'Borrar'
+					boton.onclick = function (){borrar_staff(persona.dni)}
+					borrar.appendChild(boton)
 	
 					tr.appendChild(dni);
 					tr.appendChild(nombre);
 					tr.appendChild(rol);
 					tr.appendChild(turno);
 					tr.appendChild(contacto);
+					tr.appendChild(boton)
 	
 					tabla.appendChild(tr);  
 				});
 			})
+
+
+			borrar_staff = function(dni){
+				alert('Borrando Staff DNI: ' + dni)
+				fetch('http://127.0.0.1:3002/api/v1/personal/' + dni, {method: 'DELETE'})
+				.then(response => response.json())
+				.then( response => {
+					console.log(response)
+				})
+			}
+
+			
 		</script>
 	</body>
 </html>

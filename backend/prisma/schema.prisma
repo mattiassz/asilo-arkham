@@ -17,9 +17,9 @@ model Criminal {
   peligrosidad  String
   personal_asignado Int  // Foreign key que se relaciona con Staff.dni
   celda         Int  
-  personal      Personal  @relation(fields: [personal_asignado], references: [dni]) // Relación con Personal
-  delitos       Delito[]  // Relación con Delito
-  celda_info    Celda @relation(fields: [celda], references: [numero_celda]) // Relación con Celda
+  personal      Personal  @relation(fields: [personal_asignado], references: [dni], onDelete: Cascade) // Relación con Personal
+  delitos       Delito[] // Relación con Delito
+  celda_info    Celda @relation(fields: [celda], references: [numero_celda], onDelete: Cascade) // Relación con Celda
 }
 
 model Personal {
@@ -40,7 +40,7 @@ model Delito {
   lugarDelito   String
   estadoDelito  String
   nivelPrioridad String
-  criminal      Criminal @relation(fields: [criminal_id], references: [id])
+  criminal      Criminal @relation(fields: [criminal_id], references: [id], onDelete: Cascade)
 }
 
 model Celda {

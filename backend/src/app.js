@@ -282,7 +282,7 @@ app.get('/api/v1/delitos/:numero_delito', async (req,res)=>{
 app.post('/api/v1/delitos', async (req,res)=>{
     let criminal = await prisma.criminal.findUnique({ 
         where: {
-            id: req.body.criminal_id
+            id: parseInt(req.body.criminal_id)
         },
     })
     if (criminal === null){  //validación
