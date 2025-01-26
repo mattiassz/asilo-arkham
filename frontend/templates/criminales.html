@@ -77,6 +77,11 @@
 						let contenido = document.createElement('div');
 						contenido.classList.add('contenido');
 
+						let foto = document.createElement('img')
+						foto.setAttribute('src', criminal.foto )
+						foto.width = 150; 
+						foto.height = 150; 
+
 						let nombre = document.createElement('h3');
 						nombre.classList.add('nombre');
 						nombre.textContent = criminal.nombre;
@@ -113,6 +118,8 @@
 						borrar.textContent = 'Borrar';
 						borrar.onclick = function() { borrar_criminal(criminal.id); };
 
+						
+
 						contenido.appendChild(nombre);
 						contenido.appendChild(apodo);
 						contenido.appendChild(edad);
@@ -121,6 +128,7 @@
 						contenido.appendChild(peligrosidad);
 						contenido.appendChild(personal_asignado);
 						contenido.appendChild(celda);
+						contenido.appendChild(foto)
 						contenido.appendChild(borrar);
 
 						tarjeta.appendChild(contenido);
