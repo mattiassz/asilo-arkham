@@ -16,9 +16,10 @@
 					<li><a href="delitos.html">Delitos</a></li>
 					<li><a href="celdas.html">Celdas</a></li>
 					<li><a href="personal.html">Personal</a></li>
-                    <li><a href="cargar_criminal.html">Cargar Criminal</a></li>
+                    <li class="cargar"><a href="cargar_criminal.html">Cargar Criminal</a></li>
 				</ul>
 			</nav>
+
 			<main>
 				<header>
 					<div class="header-overlay">
@@ -28,56 +29,117 @@
 						</div>
 					</div>
 				</header>
+
 				<section class="secciones">
-					<p class="titulos">Arkhan System</p>
+					<p class="titulos">Arkham System</p>
 					<p>
                         Asilo Arkham, líder mundial en el tratamiento y rehabilitación de individuos con trastornos mentales extremos. Desde 1921, nuestra misión ha sido proporcionar atención especializada combinando ciencia avanzada, seguridad de máxima categoría y un profundo compromiso con la recuperación de nuestros pacientes.
 					</p>
 				</section>
+
 				<section class="secciones">
 					<p class="titulos">Informacion general</p>
-					lego batman
-
+					<p>lego batman</p>
 				</section>
+
 				<section class="tarjetas-criminales">
 					<h2 class="titulos">Criminales de Arkham</h2>
-					<div class="tarjetas">
-						<!-- Tarjeta 1 -->
-						<div class="tarjeta">
-							<img src="../static/img/penguin.jpeg" alt="Oswald Cobblepot" class="imagen-criminal">
-							<div class="contenido">
-								<h3 class="nombre">Oswald Cobblepot</h3>
-								<p class="apodo">(El Pingüino)</p>
-								<p class="descripcion">Crimen: Contrabando de armas y extorsión</p>
-							</div>
-						</div>
-						<!-- Tarjeta 2 -->
-						<div class="tarjeta">
-							<img src="../static/img/harley.jpeg" alt="Harleen Quinzel" class="imagen-criminal">
-							<div class="contenido">
-								<h3 class="nombre">Harleen Quinzel</h3>
-								<p class="apodo">(Harley Quinn)</p>
-								<p class="descripcion">Crimen: Secuestro y asalto agravado</p>
-							</div>
-						</div>
-						<!-- Tarjeta 3 -->
-						<div class="tarjeta">
-							<img src="../static/img/nygma.jpeg" alt="Edward Nigma" class="imagen-criminal">
-							<div class="contenido">
-								<h3 class="nombre">Edward Nigma</h3>
-								<p class="apodo">(El Acertijo)</p>
-								<p class="descripcion">Crimen: Cibercrimen y chantaje</p>
-							</div>
-						</div>
+					<div class="tarjetas" id="tarjetas-criminales">
 					</div>
 				</section>
-				
-				
+
 			</main>
 
 			<footer>
 				<p>hecho por batman</p>
 			</footer>
 		</div>
+
+		<script>
+			window.onload = function (){
+				MostrarCriminales();
+			}
+
+			MostrarCriminales = function(){
+				fetch('http://127.0.0.1:3002/api/v1/criminales')
+				.then(response => response.json())
+				.then(criminales => {
+					console.log(criminales);
+
+					let contenedorTarjetas = document.getElementById('tarjetas-criminales');
+					contenedorTarjetas.innerHTML = '';
+
+					criminales.forEach(criminal => {
+						let tarjeta = document.createElement('div');
+						tarjeta.classList.add('tarjeta');
+						tarjeta.id = 'criminal-' + criminal.id;
+
+						let contenido = document.createElement('div');
+						contenido.classList.add('contenido');
+
+						let nombre = document.createElement('h3');
+						nombre.classList.add('nombre');
+						nombre.textContent = criminal.nombre;
+
+						let apodo = document.createElement('p');
+						apodo.classList.add('apodo');
+						apodo.textContent = `Apodo: (${criminal.apodo})`;
+
+						let edad = document.createElement('p');
+						edad.classList.add('descripcion');
+						edad.textContent = `Edad: ${criminal.edad}`;
+
+						let genero = document.createElement('p');
+						genero.classList.add('descripcion');
+						genero.textContent = `Género: ${criminal.genero}`;
+
+						let tratamiento = document.createElement('p');
+						tratamiento.classList.add('descripcion');
+						tratamiento.textContent = `Tratamiento: ${criminal.tratamiento}`;
+
+						let peligrosidad = document.createElement('p');
+						peligrosidad.classList.add('descripcion');
+						peligrosidad.textContent = `Peligrosidad: ${criminal.peligrosidad}`;
+
+						let personal_asignado = document.createElement('p');
+						personal_asignado.classList.add('descripcion');
+						personal_asignado.textContent = `Personal Asignado: ${criminal.personal_asignado}`;
+
+						let celda = document.createElement('p');
+						celda.classList.add('descripcion');
+						celda.textContent = `Celda: ${criminal.celda}`;
+
+						let borrar = document.createElement('button');
+						borrar.textContent = 'Borrar';
+						borrar.onclick = function() { borrar_criminal(criminal.id); };
+
+						contenido.appendChild(nombre);
+						contenido.appendChild(apodo);
+						contenido.appendChild(edad);
+						contenido.appendChild(genero);
+						contenido.appendChild(tratamiento);
+						contenido.appendChild(peligrosidad);
+						contenido.appendChild(personal_asignado);
+						contenido.appendChild(celda);
+						contenido.appendChild(borrar);
+
+						tarjeta.appendChild(contenido);
+
+						contenedorTarjetas.appendChild(tarjeta);
+					});
+				});
+			}
+
+			borrar_criminal = function(id){
+				alert('Borrando Criminal ID: ' + id)
+				fetch('http://127.0.0.1:3002/api/v1/criminales/' + id, {method: 'DELETE'})
+				.then(response => response.json())
+				.then(response => {
+					console.log(response);
+					let tarjeta = document.getElementById("criminal-" + response.id);
+					tarjeta.remove();
+				})
+			}
+		</script>
 	</body>
 </html>

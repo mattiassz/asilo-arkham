@@ -16,7 +16,7 @@
 					<li><a href="delitos.html">Delitos</a></li>
 					<li><a href="celdas.html">Celdas</a></li>
 					<li><a href="personal.html">Personal</a></li>
-                    <li><a href="cargar_criminal.html">Cargar Criminal</a></li>
+                    <li class="cargar"><a href="cargar_criminal.html">Cargar Criminal</a></li>
 				</ul>
 			</nav>
 			<main>
@@ -35,9 +35,22 @@
 					</p>
 				</section>
 				<section class="secciones">
-					<p class="titulos">Informacion general</p>
-					lego batman
+					<p class="titulos">Personal</p>
+					<table class="tabla-personal">
+						<thead>
+							<tr>
+								<th>DNI</th>
+								<th>Nombre</th>
+								<th>Rol</th>
+								<th>Turno</th>
+								<th>Contacto</th>
+								<th>Borrar Staff</th>
 
+							</tr>
+						</thead>
+						<tbody id="personal-data">
+						</tbody>
+					</table>
 				</section>
 			</main>
 
@@ -45,5 +58,59 @@
 				<p>hecho por batman</p>
 			</footer>
 		</div>
+		<script>
+			fetch('http://127.0.0.1:3002/api/v1/personal')
+			.then(response => response.json())
+			.then(personal => {
+				console.log(personal);
+	
+				let tabla = document.getElementById('personal-data');
+				personal.forEach(persona => {
+					let tr = document.createElement('tr');
+	
+					let dni = document.createElement('td');
+					dni.textContent = persona.dni;  
+	
+					let nombre = document.createElement('td');
+					nombre.textContent = persona.nombre;
+	
+					let rol = document.createElement('td');
+					rol.textContent = persona.rol;  
+	
+					let turno = document.createElement('td');
+					turno.textContent = persona.turno;  
+	
+					let contacto = document.createElement('td');
+					contacto.textContent = persona.contacto;
+
+					let borrar = document.createElement('td');
+					let boton = document.createElement('button')
+					boton.textContent = 'Borrar'
+					boton.onclick = function (){borrar_staff(persona.dni)}
+					borrar.appendChild(boton)
+	
+					tr.appendChild(dni);
+					tr.appendChild(nombre);
+					tr.appendChild(rol);
+					tr.appendChild(turno);
+					tr.appendChild(contacto);
+					tr.appendChild(boton)
+	
+					tabla.appendChild(tr);  
+				});
+			})
+
+
+			borrar_staff = function(dni){
+				alert('Borrando Staff DNI: ' + dni)
+				fetch('http://127.0.0.1:3002/api/v1/personal/' + dni, {method: 'DELETE'})
+				.then(response => response.json())
+				.then( response => {
+					console.log(response)
+				})
+			}
+
+			
+		</script>
 	</body>
 </html>
