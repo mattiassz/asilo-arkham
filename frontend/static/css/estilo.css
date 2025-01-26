@@ -93,10 +93,9 @@ header h1 {
 
 
 .contenedor {
-    width: 90%;
     margin: auto;
     overflow: hidden;
-    max-width: 1200px;
+    max-width: 1320px;
     background-color: #181818;
     padding: 30px;
     border-radius: 10px;
