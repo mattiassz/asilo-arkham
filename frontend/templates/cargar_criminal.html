@@ -51,7 +51,13 @@
                         <input type="text" id="tratamiento" name="tratamiento" required pattern="^[a-zA-Z\s]+$" />
 
                         <label for="peligrosidad">Peligrosidad:</label>
-                        <input type="text" id="peligrosidad" name="peligrosidad" required pattern="^[a-zA-Z\s]+$" />
+                        <select id="peligrosidad" name="peligrosidad" required>
+                            <option value="">Selecciona nivel de Peligrosidad</option>
+                            <option value="Bajo">Bajo</option>
+                            <option value="Medio">Medio</option>
+                            <option value="Peligroso">Peligroso</option>
+                            <option value="Extremadamente Peligroso">Extremadamente Peligroso</option>
+                        </select>
 
                         <label for="personal_asignado">Personal Asignado (DNI):</label>
                         <select id="personal_asignado" name="personal_asignado" required>
