@@ -610,3 +610,89 @@ form .secciones {
         font-size: 12px;
     }
 }
+/* TABLA DELITOS */
+.tabla-delitos {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #181818;
+    color: #f5f5f5;
+    border-radius: 12px; 
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); 
+}
+
+.tabla-delitos th, .tabla-delitos td {
+    padding: 14px 20px;
+    text-align: left;
+    font-size: 16px;
+    border-bottom: 1px solid #333; 
+}
+
+.tabla-delitos th {
+    background-color: #212121;
+    color: #00bcd4;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.tabla-delitos td {
+    background-color: #242424;
+    color: #ccc;
+    transition: background-color 0.2s ease;
+}
+
+.tabla-delitos tr:nth-child(even) td {
+    background-color: #2a2a2a; 
+}
+
+.tabla-delitos tr:nth-child(odd) td {
+    background-color: #242424;
+}
+
+.tabla-delitos tr:hover td {
+    background-color: #333; 
+}
+
+.tabla-delitos td .nombre-delito {
+    font-weight: bold;
+    color: #00bcd4;
+}
+
+.tabla-delitos td .descripcion-delito {
+    font-style: italic;
+    color: #bbb;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .tabla-delitos th, .tabla-delitos td {
+        padding: 12px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .tabla-delitos th, .tabla-delitos td {
+        padding: 10px;
+        font-size: 12px;
+    }
+    .tabla-delitos td {
+        display: block;
+        width: 100%;
+        text-align: right;
+        border: none;
+    }
+    .tabla-delitos td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        text-transform: uppercase;
+        color: #00bcd4;
+        display: block;
+        margin-bottom: 5px;
+    }
+    .tabla-delitos tr {
+        display: block;
+        margin-bottom: 15px;
+    }
+}
