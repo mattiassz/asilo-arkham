@@ -495,10 +495,10 @@ button:active {
 }
 
 form {
-    background-color: #212121; /* Fondo oscuro, coherente con el tema */
+    background-color: #212121; 
     border-radius: 8px;
     padding: 30px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6); /* Sombra para resaltar el formulario */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6); 
     max-width: 800px;
     margin: 0 auto;
 }
@@ -507,7 +507,7 @@ form label {
     display: block;
     font-size: 16px;
     margin-bottom: 8px;
-    color: #bbb; /* Gris suave para las etiquetas */
+    color: #bbb; 
     text-transform: uppercase;
     letter-spacing: 1px;
 }
@@ -516,17 +516,17 @@ form input {
     width: 100%;
     padding: 12px;
     margin-bottom: 15px;
-    background-color: #333; /* Fondo oscuro de los inputs */
-    border: 1px solid #444; /* Borde sutil */
+    background-color: #333; 
+    border: 1px solid #444; 
     border-radius: 6px;
-    color: #fff; /* Texto blanco para contraste */
+    color: #fff; 
     font-size: 14px;
     transition: border-color 0.3s ease;
 }
 
 form input:focus {
-    border-color: #00bcd4; /* Azul brillante en el borde cuando se enfoca */
-    outline: none; /* Eliminar el borde de enfoque predeterminado */
+    border-color: #00bcd4; 
+    outline: none; 
 }
 
 form select {
@@ -539,7 +539,7 @@ form select {
     color: #fff;
     font-size: 14px;
     transition: border-color 0.3s ease;
-    appearance: none; /* Eliminar la flecha predeterminada */
+    appearance: none; 
     background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"%3E%3Cpath fill="none" stroke="%23bbb" stroke-width="2" d="M4 6l4 4 4-4"%3E%3C/path%3E%3C/svg%3E'); /* Flecha personalizada */
     background-repeat: no-repeat;
     background-position: right 10px center;
@@ -547,12 +547,12 @@ form select {
 
 form select:focus {
     border-color: #00bcd4;
-    background-color: #2d2d2d; /* Fondo ligeramente más claro al enfocar */
+    background-color: #2d2d2d; 
 }
 
 form button {
-    background-color: #00bcd4; /* Azul brillante para el botón */
-    color: #fff; /* Texto blanco */
+    background-color: #00bcd4; 
+    color: #fff;
     padding: 12px;
     border: none;
     border-radius: 6px;
@@ -561,15 +561,15 @@ form button {
     text-transform: uppercase;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    width: 100%; /* Botón que ocupa todo el ancho del formulario */
+    width: 100%; 
 }
 
 form button:hover {
-    background-color: #0097a7; /* Cambio a un tono más oscuro de azul al hacer hover */
+    background-color: #0097a7; 
 }
 
 form button:active {
-    transform: translateY(2px); /* Efecto de presionar el botón */
+    transform: translateY(2px); 
 }
 
 form .secciones {
@@ -608,5 +608,91 @@ form .secciones {
     }
     form button {
         font-size: 12px;
+    }
+}
+/* TABLA DELITOS */
+.tabla-delitos {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #181818;
+    color: #f5f5f5;
+    border-radius: 12px; 
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); 
+}
+
+.tabla-delitos th, .tabla-delitos td {
+    padding: 14px 20px;
+    text-align: left;
+    font-size: 16px;
+    border-bottom: 1px solid #333; 
+}
+
+.tabla-delitos th {
+    background-color: #212121;
+    color: #00bcd4;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.tabla-delitos td {
+    background-color: #242424;
+    color: #ccc;
+    transition: background-color 0.2s ease;
+}
+
+.tabla-delitos tr:nth-child(even) td {
+    background-color: #2a2a2a; 
+}
+
+.tabla-delitos tr:nth-child(odd) td {
+    background-color: #242424;
+}
+
+.tabla-delitos tr:hover td {
+    background-color: #333; 
+}
+
+.tabla-delitos td .nombre-delito {
+    font-weight: bold;
+    color: #00bcd4;
+}
+
+.tabla-delitos td .descripcion-delito {
+    font-style: italic;
+    color: #bbb;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .tabla-delitos th, .tabla-delitos td {
+        padding: 12px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .tabla-delitos th, .tabla-delitos td {
+        padding: 10px;
+        font-size: 12px;
+    }
+    .tabla-delitos td {
+        display: block;
+        width: 100%;
+        text-align: right;
+        border: none;
+    }
+    .tabla-delitos td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        text-transform: uppercase;
+        color: #00bcd4;
+        display: block;
+        margin-bottom: 5px;
+    }
+    .tabla-delitos tr {
+        display: block;
+        margin-bottom: 15px;
     }
 }

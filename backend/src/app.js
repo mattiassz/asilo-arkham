@@ -288,7 +288,7 @@ app.post('/api/v1/delitos', async (req,res)=>{
 
     let delito = await prisma.delito.create({
         data: {
-            criminal_id: req.body.criminal_id,
+            criminal_id: parseInt(req.body.criminal_id),
             descripcion: req.body.descripcion,
             fecha: req.body.fecha,
             sentencia_judicial: req.body.sentencia_judicial,
@@ -313,7 +313,7 @@ app.delete('/api/v1/delitos/:numero_delito', async  (req,res)=>{
     }
     await prisma.delito.delete({
         where: {
-            numero_delito: req.params.numero_delito
+            numero_delito: parseInt(req.params.numero_delito)
         },    
     })
     res.send(delito)
@@ -345,7 +345,7 @@ app.put('/api/v1/delitos/:numero_delito', async (req,res)=>{
 
     await prisma.delito.update({
         where: {
-            numero_delito: req.params.numero_delito
+            numero_delito: parseInt(req.params.numero_delito)
         },
         data: {
             criminal_id: req.body.criminal_id,
