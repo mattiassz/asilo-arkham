@@ -49,7 +49,7 @@ app.post('/api/v1/criminales', async (req, res) => {
     })
 
     if (personal === null){
-        res.send(400)
+        res.sendStatus(400)
         return
     }
 
@@ -60,7 +60,7 @@ app.post('/api/v1/criminales', async (req, res) => {
     })
 
     if (celda === null){
-        res.send(400)
+        res.sendStatus(400)
         return
     }
 
@@ -74,8 +74,6 @@ app.post('/api/v1/criminales', async (req, res) => {
             genero: req.body.genero,
             peligrosidad: req.body.peligrosidad,
             tratamiento: req.body.tratamiento,
-            fechaIngreso: req.body.fechaIngreso,
-            delito: req.body.delito,
             personal_asignado: req.body.personal_asignado,
             celda: req.body.celda,
             foto: req.body.foto
@@ -135,7 +133,7 @@ app.put('/api/v1/criminales/:id', async (req,res)=> {
             }
         })
         if (personal === null){
-            res.send(400)
+            res.sendStatus(400)
             return
         }
     }
@@ -152,8 +150,6 @@ app.put('/api/v1/criminales/:id', async (req,res)=> {
             genero: req.body.genero,
             peligrosidad: req.body.peligrosidad,
             tratamiento: req.body.tratamiento,
-            fechaIngreso: req.body.fechaIngreso,
-            delito: req.body.delito,
             personal_asignado: req.body.personal_asignado,
             celda: req.body.celda,
             foto: req.body.foto
@@ -286,7 +282,7 @@ app.post('/api/v1/delitos', async (req,res)=>{
         },
     })
     if (criminal === null){  //validación
-        res.send(404)
+        res.sendStatus(404)
         return
     }
 
@@ -384,7 +380,7 @@ app.get('/api/v1/celdas/:numero_celda', async (req, res)=>{
         }
     })
     if (celda === null) {
-        res.send(404)
+        res.sendStatus(404)
         return
     }
     res.send(celda)
@@ -397,7 +393,7 @@ app.delete('/api/v1/celdas/:numero_celda', async (req,res)=>{
         }
     })
     if (celda === null) {
-        res.send(404)
+        res.sendStatus(404)
         return
     }
     await prisma.celda.delete({
@@ -416,7 +412,7 @@ app.put('/api/v1/celdas/:numero_celda', async (req,res)=>{
         }
     })
     if (celda === null) {
-        res.send(404)
+        res.sendStatus(404)
         return
     }
 
