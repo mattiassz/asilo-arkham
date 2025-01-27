@@ -21,6 +21,7 @@ model Criminal {
   personal      Personal  @relation(fields: [personal_asignado], references: [dni], onDelete: Cascade) // Relación con Personal
   delitos       Delito[] // Relación con Delito
   celda_info    Celda @relation(fields: [celda], references: [numero_celda], onDelete: Cascade) // Relación con Celda
+  foto String?
 }
 
 model Personal {
