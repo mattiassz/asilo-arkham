@@ -74,8 +74,6 @@ app.post('/api/v1/criminales', async (req, res) => {
             genero: req.body.genero,
             peligrosidad: req.body.peligrosidad,
             tratamiento: req.body.tratamiento,
-            fechaIngreso: req.body.fechaIngreso,
-            delito: req.body.delito,
             personal_asignado: req.body.personal_asignado,
             celda: req.body.celda,
             foto: req.body.foto
@@ -152,8 +150,6 @@ app.put('/api/v1/criminales/:id', async (req,res)=> {
             genero: req.body.genero,
             peligrosidad: req.body.peligrosidad,
             tratamiento: req.body.tratamiento,
-            fechaIngreso: req.body.fechaIngreso,
-            delito: req.body.delito,
             personal_asignado: req.body.personal_asignado,
             celda: req.body.celda,
             foto: req.body.foto
