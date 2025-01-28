@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="../static/css/estilo.css" type="text/css" />
+		<title>Arkham Asylum</title>
+	</head>
+	<body>
+		<div class="contenedor">
+
+			<nav>
+				<ul>
+					<li><a href="inicio.html">Inicio</a></li>
+					<li><a href="criminales.html">Criminales</a></li>
+					<li><a href="delitos.html">Delitos</a></li>
+					<li><a href="celdas.html">Celdas</a></li>
+					<li><a href="personal.html">Personal</a></li>
+                    <li class="cargar"><a href="cargar_criminal.html">Cargar Criminal</a></li>
+				</ul>
+			</nav>
+			<main>
+				<header>
+					<div class="header-overlay">
+						<div class="header-text">
+							<h1>Arkham Asylum</h1>
+							<p>Centro de rehabilitación y tratamiento de individuos con trastornos extremos.</p>
+						</div>
+					</div>
+				</header>
+				<section class="secciones">
+					<p class="titulos">Arkhan System</p>
+					<p>
+                        Asilo Arkham, líder mundial en el tratamiento y rehabilitación de individuos con trastornos mentales extremos. Desde 1921, nuestra misión ha sido proporcionar atención especializada combinando ciencia avanzada, seguridad de máxima categoría y un profundo compromiso con la recuperación de nuestros pacientes.
+					</p>
+				</section>
+				<section class="secciones">
+					<p class="titulos">Informacion general</p>
+					lego batman
+
+				</section>
+
+
+				<section class="secciones">
+					<p class="titulos">Celdas</p>
+					<table class="tabla-celdas">
+						<thead>
+							<tr>
+								<th>Tipo de celda</th>
+								<th>Descripcion</th>
+								<th>Seguridad</th>
+								<th>Cámaras</th>
+								<th>Sensores</th>
+								<th>Alarmas</th>
+								<th>Piso</th>
+								<th>Capacidad</th>
+								<th>Numero de Celda</th>
+
+
+							</tr>
+						</thead>
+						<tbody id="celdas-data">
+							
+						</tbody>
+					</table>
+				</section>
+			</main>
+
+			<footer>
+				<p>hecho por batman</p>
+			</footer>
+		</div>
+		<script>
+			fetch('http://127.0.0.1:3002/api/v1/celdas')
+			.then(res => res.json())
+			.then(celdas => {
+				console.log(celdas)
+				
+				let tabla = document.getElementById('celdas-data');
+				let index = 1;
+				celdas.forEach(celda => {
+					let tr = document.createElement('tr');
+	
+					let tipoCelda = document.createElement('td');
+					tipoCelda.textContent = celda.tipoCelda;  
+	
+					let descripcionCelda = document.createElement('td');
+					descripcionCelda.textContent = celda.descripcionCelda;
+	
+					let nivelSeguridad = document.createElement('td');
+					nivelSeguridad.textContent = celda.nivelSeguridad;  
+	
+					let camarasSeguridad = document.createElement('td');
+					camarasSeguridad.textContent = celda.camarasSeguridad;  
+	
+					let sensoresMovimiento = document.createElement('td');
+					sensoresMovimiento.textContent = celda.sensoresMovimiento;
+
+
+					let alarmas = document.createElement('td');
+					alarmas.textContent = celda.alarmas;
+
+					let piso = document.createElement('td');
+					piso.textContent = celda.piso;
+
+					let capacidad = document.createElement('td');
+					capacidad.textContent = celda.capacidad;
+
+					let numero_celda = document.createElement('td');
+					numero_celda.textContent = index;
+					index++
+
+					
+	
+					tr.appendChild(tipoCelda);
+					tr.appendChild(descripcionCelda);
+					tr.appendChild(nivelSeguridad);
+					tr.appendChild(camarasSeguridad);
+					tr.appendChild(sensoresMovimiento);
+					tr.appendChild(alarmas);
+					tr.appendChild(piso);
+					tr.appendChild(capacidad);
+					tr.appendChild(numero_celda);
+
+
+	
+					tabla.appendChild(tr);  
+				});
+			})
+		</script>
+	</body>
+</html>

@@ -42,7 +42,9 @@
                     <div id="formularioDelito" style="display: none;">
                         <form id="formDelito">
                             <label for="criminal_id">Criminal:</label>
-                            <select id="criminal_id" name="criminal_id" required>
+                            
+                            <select id="criminal_id" name="criminal_id" >
+                                <option value="" disabled selected>Selecciona un criminal</option>
                             </select>
                             <br />
 
@@ -110,10 +112,11 @@
                             let tr = document.createElement("tr");
         
                             let criminal_id = document.createElement("td");
-                            criminal_id.textContent = delito.criminal_id;
+                            criminal_id.textContent = delito.criminal_id ;
         
                             let descripcion = document.createElement("td");
                             descripcion.textContent = delito.descripcion;
+                            descripcion.className = "td-descripcion"; 
         
                             let fecha = document.createElement("td");
                             fecha.textContent = delito.fecha;
@@ -164,11 +167,11 @@
             fetch("http://127.0.0.1:3002/api/v1/criminales")
                 .then((response) => response.json())
                 .then((criminales) => {
-                    const selectCriminal = document.getElementById("criminal_id");
+                    let selectCriminal = document.getElementById("criminal_id");
                     criminales.forEach((criminal) => {
                         let option = document.createElement("option");
                         option.value = criminal.id;
-                        option.textContent = `${criminal.nombre} ${criminal.apellido}`;
+                        option.textContent = ` ${criminal.nombre}  (${criminal.apodo})`;
                         selectCriminal.appendChild(option);
                     });
                 })
