@@ -664,6 +664,11 @@ form .secciones {
     background-color: #0097a7;
 }
 
+#descripcion {
+    width: 300px; 
+    height: 200px; 
+}
+
 /* RESPONSIVE */
 @media (max-width: 768px) {
     .tabla-delitos th, .tabla-delitos td {
@@ -692,4 +697,11 @@ form .secciones {
         word-wrap: break-word; 
         word-break: break-all;
     }
+}
+
+.td-descripcion {
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
