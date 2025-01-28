@@ -209,11 +209,11 @@ app.delete('/api/v1/personal/:dni', async (req,res)=>{  //borrar alguno edl pers
 app.post('/api/v1/personal', async (req, res) => {  //crear alguien del personal
     const nuevo_laburante = await prisma.personal.create({
         data: {
-            dni: req.body.dni,
+            dni: parseInt(req.body.dni),
             nombre: req.body.nombre,
             rol: req.body.rol,
             turno: req.body.turno,
-            contacto: req.body.contacto
+            contacto: parseInt(req.body.contacto)
         }})
     res.send(nuevo_laburante)
 })
