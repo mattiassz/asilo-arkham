@@ -28,13 +28,12 @@
                     </div>
                 </header>
                 <section class="secciones">
-                    <p class="titulos">Arkhan System</p>
+                    <p class="titulos">Registro de delitos</p>
                     <p>
-                        Asilo Arkham, líder mundial en el tratamiento y rehabilitación de individuos con trastornos mentales extremos. Desde 1921, nuestra misión ha sido proporcionar atención especializada combinando ciencia avanzada,
-                        seguridad de máxima categoría y un profundo compromiso con la recuperación de nuestros pacientes.
+                        En esta sección se registran y gestionan los delitos cometidos por los criminales ingresados en el Asilo Arkham. Aquí se almacenan los detalles de cada incidente, incluyendo la descripción, fecha, sentencia judicial y lugar del crimen. Además, se asignan niveles de prioridad, asegurando que los casos más urgentes reciban atención inmediata. 
                     </p>
-                    <p class="titulos">Información general</p>
-                    <p>Introduce los datos para cargar un nuevo delito:</p>
+                    <p class="titulos">Carga de delitos</p>
+                    <p>Introduce los datos para cargar un nuevo delito, este debera ser asociado a un criminal:</p>
 
                     <button id="mostrarFormulario">Cargar Delito</button>
 
@@ -72,13 +71,14 @@
                             <br />
 
                             <button type="submit">Enviar Delito</button>
+                            <button type="button" id="cancelarFormulario">Cancelar</button>
                         </form>
                     </div>
                 </section>
 
                 <section class="secciones">
                     <p class="titulos">Delitos</p>
-                    <table class="tabla-delitos">
+                    <table class="tabla-generica">
                         <thead>
                             <tr>
                                 <th>Criminal n°</th>
@@ -185,6 +185,13 @@
                 document.getElementById("formDelito").reset();
                 document.getElementById("formDelito").dataset.action = "create";
             });
+
+            //BOTON PARA CANCELAR
+            document.getElementById("cancelarFormulario").addEventListener("click", function () {
+                document.getElementById("formularioDelito").style.display = "none";
+                document.getElementById("formDelito").reset();
+            });
+            
         
             // ENVIAR EL FORMULARIO Y CREAR/ACTUALIZAR DELITO
             document.getElementById("formDelito").addEventListener("submit", function (event) {

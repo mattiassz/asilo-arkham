@@ -346,7 +346,7 @@ footer p {
 /*--------------------------------------------------------------------- 
 
 TABLA DE PERSONAL */
-.tabla-personal {
+.tabla-generica {
     width: 100%;
     border-collapse: collapse;
     background-color: #181818;
@@ -355,14 +355,14 @@ TABLA DE PERSONAL */
     overflow: hidden;
 }
 
-.tabla-personal th, .tabla-personal td {
+.tabla-generica th, .tabla-generica td {
     padding: 16px;
     text-align: left;
     font-size: 16px;
     border-bottom: 1px solid #333;
 }
 
-.tabla-personal th {
+.tabla-generica th {
     background-color: #212121;
     color: #00bcd4;
     text-transform: uppercase;
@@ -370,14 +370,14 @@ TABLA DE PERSONAL */
     font-weight: 600;
 }
 
-.tabla-personal td {
+.tabla-generica td {
     background-color: #242424;
     color: #ccc;
     border-left: 5px solid transparent;
     transition: background-color 0.3s ease;
 }
 
-.tabla-personal tr:hover td {
+.tabla-generica tr:hover td {
     background-color: #333;
 }
 
@@ -404,24 +404,24 @@ TABLA DE PERSONAL */
 
 /* RESPONSIVE TABLA PERSONAL */
 @media (max-width: 768px) {
-    .tabla-personal th, .tabla-personal td {
+    .tabla-generica th, .tabla-generica td {
         padding: 12px;
         font-size: 14px;
     }
 }
 
 @media (max-width: 480px) {
-    .tabla-personal th, .tabla-personal td {
+    .tabla-generica th, .tabla-generica td {
         padding: 10px;
         font-size: 12px;
     }
-    .tabla-personal td {
+    .tabla-generica td {
         display: block;
         width: 100%;
         text-align: right;
         border: none;
     }
-    .tabla-personal td::before {
+    .tabla-generica td::before {
         content: attr(data-label);
         font-weight: bold;
         text-transform: uppercase;
@@ -429,7 +429,7 @@ TABLA DE PERSONAL */
         display: block;
         margin-bottom: 5px;
     }
-    .tabla-personal tr {
+    .tabla-generica tr {
         display: block;
         margin-bottom: 15px;
     }
@@ -609,99 +609,4 @@ form .secciones {
     form button {
         font-size: 12px;
     }
-}
-/* TABLA DELITOS */
-.tabla-delitos {
-    width: 100%;
-    border-collapse: collapse;
-    overflow: hidden;
-}
-
-.tabla-delitos th, .tabla-delitos td {
-    padding: 10px;
-    text-align: left;
-    font-size: 14px;
-    border-bottom: 1px solid #333;
-    word-wrap: break-word; 
-    white-space: normal; 
-    word-break: break-word; 
-}
-
-.tabla-delitos th {
-    background-color: #212121;
-    color: #00bcd4;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: 600;
-}
-
-.tabla-delitos td {
-    background-color: #242424;
-    color: #ccc;
-    border-left: 5px solid transparent;
-}
-
-.tabla-delitos td .acciones {
-    display: flex;
-    justify-content: space-around;
-    gap: 10px;
-    width: 100%; 
-    padding: 5px;
-}
-
-.tabla-delitos td .acciones button {
-    font-size: 12px;
-    padding: 6px 12px;
-    background-color: #00bcd4;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.tabla-delitos td .acciones button:hover {
-    background-color: #0097a7;
-}
-
-#descripcion {
-    width: 300px; 
-    height: 200px; 
-}
-
-/* RESPONSIVE */
-@media (max-width: 768px) {
-    .tabla-delitos th, .tabla-delitos td {
-        padding: 8px;
-        font-size: 12px;
-    }
-
-    .tabla-delitos td .acciones {
-        flex-direction: column; 
-        justify-content: flex-start;
-    }
-
-    .tabla-delitos td .acciones button {
-        width: 100%;
-    }
-}
-
-@media (max-width: 480px) {
-    .tabla-delitos th, .tabla-delitos td {
-        padding: 6px;
-        font-size: 10px;
-    }
-
-    .tabla-delitos td {
-        white-space: normal; 
-        word-wrap: break-word; 
-        word-break: break-all;
-    }
-}
-
-.td-descripcion {
-    max-width: 100px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
 }
