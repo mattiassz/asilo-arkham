@@ -425,9 +425,9 @@ app.put('/api/v1/celdas/:numero_celda', async (req,res)=>{
             tipoCelda: req.body.tipoCelda,
             descripcionCelda: req.body.descripcionCelda,
             nivelSeguridad: req.body.nivelSeguridad,
-            camarasSeguridad: req.body.camarasSeguridad,
-            sensoresMovimiento: req.body.sensoresMovimiento,
-            alarmas: req.body.alarmas,
+            camarasSeguridad: JSON.parse(req.body.camarasSeguridad),
+            sensoresMovimiento: JSON.parse(req.body.sensoresMovimiento),
+            alarmas: JSON.parse(req.body.alarmas),
             piso: req.body.piso,
             capacidad: req.body.capacidad
         }
@@ -443,9 +443,9 @@ app.post('/api/v1/celdas', async (req,res)=>{
             tipoCelda: req.body.tipoCelda,   
             descripcionCelda: req.body.descripcionCelda,
             nivelSeguridad: req.body.nivelSeguridad,
-            camarasSeguridad: req.body.camarasSeguridad,
-            sensoresMovimiento: req.body.sensoresMovimiento,
-            alarmas: req.body.alarmas,       
+            camarasSeguridad: JSON.parse(req.body.camarasSeguridad),
+            sensoresMovimiento: JSON.parse(req.body.sensoresMovimiento),
+            alarmas: JSON.parse(req.body.alarmas),       
             piso: req.body.piso,          
             capacidad: req.body.capacidad,     
 
