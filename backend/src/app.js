@@ -241,7 +241,7 @@ app.put('/api/v1/personal/:dni', async (req,res)=> {  //modificar alguien del pe
             nombre: req.body.nombre,
             rol: req.body.rol,
             turno: req.body.turno,
-            contacto: req.body.contacto
+            contacto: parseInt(req.body.contacto)
             
         }
     })
