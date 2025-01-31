@@ -5,16 +5,16 @@ FROM node:18
 WORKDIR /usr/src/app
 
 # Copiar package.json y package-lock.json primero (para aprovechar el cache)
-COPY BACKEND/package*.json ./
+COPY backend/package*.json ./
 
-# Instalar dependencias (suponiendo que las dependencias están en la carpeta node_modules fuera de BACKEND)
+# Instalar dependencias (suponiendo que las dependencias están en la carpeta node_modules fuera de backend)
 RUN npm install
 
 # Copiar el directorio de Prisma primero (para que Prisma tenga su schema antes de generar)
-COPY BACKEND/prisma ./prisma
+COPY backend/prisma ./prisma
 
-# Copiar el resto del código dentro de BACKEND
-COPY BACKEND/src ./src
+# Copiar el resto del código dentro de backend
+COPY backend/src ./src
 
 # Verificar que el archivo schema.prisma está en el contenedor
 RUN ls -l prisma/
