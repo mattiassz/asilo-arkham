@@ -1,26 +1,12 @@
-# Usa una imagen base de Node.js
-FROM node:18
+FROM node:20  
 
-# Establecer el directorio de trabajo dentro del contenedor
-WORKDIR /usr/src/app
+WORKDIR /app  
 
-# Copiar package.json y package-lock.json primero (para aprovechar el cache)
-COPY backend/package*.json ./
+COPY package.json package-lock.json ./  
+RUN npm install  
 
-# Instalar dependencias (suponiendo que las dependencias están en la carpeta backend)
-RUN npm install
+COPY . .  
 
-# Copiar el directorio de Prisma primero (para que Prisma tenga su schema antes de generar)
-COPY backend/prisma ./prisma
+EXPOSE 3002  
 
-# Copiar el resto del código dentro de backend
-COPY backend/src ./src
-
-# Verificar que el archivo schema.prisma está en el contenedor
-RUN ls -l prisma/
-
-# Exponer el puerto en el que corre la app
-EXPOSE 3000
-
-# Comando para iniciar la aplicación con Prisma generate antes de ejecutar la app
-CMD ["sh", "-c", "npx prisma generate && node src/app.js"]
+CMD ["node", "src/app.js"]
