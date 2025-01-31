@@ -4,14 +4,17 @@ FROM node:18
 # Crear y establecer el directorio de trabajo
 WORKDIR /usr/src/app
 
-# Copiar los archivos de la aplicación
+# Copiar package.json y package-lock.json antes de instalar dependencias
 COPY package*.json ./
 
 # Instalar dependencias
 RUN npm install
 
-# Copiar el resto de la aplicación
+# Copiar el resto de la aplicación (incluyendo prisma/schema.prisma)
 COPY . .
+
+# Generar el cliente de Prisma
+RUN npx prisma generate
 
 # Exponer el puerto
 EXPOSE 3000
