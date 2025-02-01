@@ -213,7 +213,7 @@ app.post('/api/v1/personal', async (req, res) => {  //crear alguien del personal
             nombre: req.body.nombre,
             rol: req.body.rol,
             turno: req.body.turno,
-            contacto: parseInt(req.body.contacto)
+            contacto: req.body.contacto
         }})
     res.send(nuevo_laburante)
 })
@@ -241,7 +241,7 @@ app.put('/api/v1/personal/:dni', async (req,res)=> {  //modificar alguien del pe
             nombre: req.body.nombre,
             rol: req.body.rol,
             turno: req.body.turno,
-            contacto: parseInt(req.body.contacto)
+            contacto: req.body.contacto
             
         }
     })

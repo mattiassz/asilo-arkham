@@ -43,7 +43,17 @@
                     <div id="formularioCelda" style="display: none;">
                         <form id="formCelda">
                             <label for="tipoCelda">Tipo de Celda:</label><br />
-                            <input type="text" id="tipoCelda" name="tipoCelda" required />
+                            <select id="tipoCelda" name="tipoCelda" required>
+                                <option value="" disabled selected>Selecciona una opción</option>
+                                <option value="Alta Seguridad">Alta Seguridad</option>
+                                <option value="Aislamiento Total">Aislamiento Total</option>
+                                <option value="Proteccion">Proteccion</option>
+                                <option value="Reclusion Preventiva">Reclusion Preventiva</option>
+                                <option value="Enfermos Mentales">Enfermos Mentales</option>
+                                <option value="Rehabilitación">Rehabilitación</option>
+                                <option value="Bajo Riesgo">Bajo Riesgo</option>
+                                <option value="Otro">Otro</option>
+                            </select>
 
                             <label for="descripcionCelda">Descripcion de Celda:</label>
                             <input type="text" id="descripcionCelda" name="descripcionCelda" required /><br />
@@ -79,7 +89,11 @@
                             </select>
 
                             <label for="piso">Piso:</label><br />
-                            <input type="number" id="piso" name="piso" required />
+                            <select id="piso" name="piso" required>
+                                <option value="" disabled selected>Selecciona una opción</option>
+                                <option value="1">Piso 1</option>
+                                <option value="2">Piso 2</option>
+                            </select>
 
                             <label for="capacidad">Capacidad:</label><br />
                             <input type="number" id="capacidad" name="capacidad" required />
@@ -290,6 +304,8 @@
             // Mostrar el formulario
             document.getElementById("mostrarFormulario").addEventListener("click", function () {
                 document.getElementById("formularioCelda").style.display = "block";
+                document.getElementById("formCelda").reset();
+
                 document.getElementById("formCelda").dataset.action = "create";
             });
 

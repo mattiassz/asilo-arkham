@@ -29,7 +29,7 @@ model Personal {
   nombre        String
   rol           String
   turno         String
-  contacto      Int
+  contacto      String
   criminales    Criminal[]  // Relación inversa con Criminal
 }
 
