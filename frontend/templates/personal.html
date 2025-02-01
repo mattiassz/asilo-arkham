@@ -42,13 +42,23 @@
                     <div id="formularioLaburante" style="display: none;">
                         <form id="formLaburante">
                             <label for="dniLaburante">DNI:</label><br />
-                            <input type="number" id="dniLaburante" name="dniLaburante" required />
+                            <input type="text" id="dniLaburante" name="dniLaburante" maxlength="8">
+                            
 
                             <label for="nombreLaburante">Nombre Completo:</label>
                             <input type="text" id="nombreLaburante" name="nombreLaburante" required /><br />
 
                             <label for="rolLaburante">Rol:</label>
-                            <input type="text" id="rolLaburante" name="rolLaburante" required /><br />
+                            <select id="rolLaburante" name="rolLaburante" required>
+                                <option value="" disabled selected>Selecciona una opción</option>
+                                <option value="mañana">Piscologo</option>
+                                <option value="Tarde">Terapeuta</option>
+                                <option value="noche">Psiquiatra</option>
+                                <option value="Tarde">Medico</option>
+                                <option value="mañana">Guardia de seguridad</option>
+                                <option value="noche">Vigilante</option>
+                                <option value="noche">Otro</option>
+                            </select>
 
                             <label for="turnoLaburante">Turno:</label>
                             <select id="turnoLaburante" name="turnoLaburante" required>
@@ -58,8 +68,9 @@
                                 <option value="noche">Noche</option>
                             </select>
 
-                            <label for="contactoLaburante">N° De Contacto:</label>
-                            <input type="number" id="contactoLaburante" name="contactoLaburante" required /><br />
+                            <label for="contactoLaburante">Mail De Contacto:</label><br />
+                            <input type="text" id="contactoLaburante" name="contactoLaburante" required placeholder="Ingresa el correo" oninput="validarEmail()">
+                            
                             <br />
                             <button type="submit">Crear Nuevo Personal</button>
                             <button type="button" id="cancelarFormulario">Cancelar</button>
@@ -251,5 +262,6 @@
             });
             window.addEventListener("load", actualizarPersonal);
         </script>
+        <script src="../static/js/validarMail.js"></script>
     </body>
 </html>
