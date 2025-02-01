@@ -1,0 +1,15 @@
+meta {
+  name: delete jail
+  type: http
+  seq: 4
+}
+
+delete {
+  url: http://localhost:3002/api/v1/jails/:jail_number
+  body: none
+  auth: none
+}
+
+params:path {
+  jail_number: 1
+}

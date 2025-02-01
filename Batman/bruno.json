@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "Batman-Query",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}
