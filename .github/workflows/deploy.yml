@@ -1,9 +1,8 @@
 name: Deploy Batman
-
 on:
   push:
     branches:
-      - main  
+      - dev  
 
 jobs:
   build:
@@ -20,13 +19,7 @@ jobs:
       uses: JamesIves/github-pages-deploy-action@v4
       with:
         branch: gh-pages  
-        folder: frontend
+        folder: frontend/templates
         token: ${{ secrets.GITHUB_TOKEN }}
-        clean: true
-        force: true
     env:
       BACKEND_URL: ${{ secrets.BACKEND_URL }}
-
-
-
-  
