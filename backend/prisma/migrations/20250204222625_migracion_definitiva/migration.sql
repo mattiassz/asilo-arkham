@@ -20,7 +20,7 @@ CREATE TABLE "Personal" (
     "nombre" TEXT NOT NULL,
     "rol" TEXT NOT NULL,
     "turno" TEXT NOT NULL,
-    "contacto" INTEGER NOT NULL,
+    "contacto" TEXT NOT NULL,
 
     CONSTRAINT "Personal_pkey" PRIMARY KEY ("dni")
 );
