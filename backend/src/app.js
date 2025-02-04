@@ -3,7 +3,11 @@ const cors = require('cors')
 const app = express()
 const port = 3002;
 
-app.use(cors())
+app.use(cors({
+    origin: 'https://mattiassz.github.io/asilo-arkham/', 
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+  }));
 
 const { PrismaClient } = require('@prisma/client')
 const prisma = new PrismaClient()
