@@ -23,7 +23,7 @@ jobs:
       uses: JamesIves/github-pages-deploy-action@v4
       with:
         branch: gh-pages  
-        folder: frontend/templates
+        folder: frontend
         token: ${{ secrets.GITHUB_TOKEN }}
         clean: true
     env:
