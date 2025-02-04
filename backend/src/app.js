@@ -1,9 +1,9 @@
 const express = require('express')
 const cors = require('cors')
 const app = express()
-app.use(cors({ origin: '*' })); // Permite todas las solicitudes
-
 const port = 3002;
+
+app.use(cors())
 
 const { PrismaClient } = require('@prisma/client')
 const prisma = new PrismaClient()
