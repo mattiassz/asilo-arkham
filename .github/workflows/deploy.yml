@@ -1,3 +1,5 @@
+
+
 name: Deploy Batman
 
 on:
@@ -13,19 +15,20 @@ jobs:
     - name: Check out the repository
       uses: actions/checkout@v3
 
-    - name: Build project
-      run: echo "No build necessary"  
+    - name: Move files to the correct folder
+      run: |
+        mkdir -p public
+        cp -r frontend/templates/* public/
+        cp -r frontend/static public/static
 
     - name: Deploy to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@v4
       with:
         branch: gh-pages  
-        folder: frontend
+        folder: public
         token: ${{ secrets.GITHUB_TOKEN }}
         clean: true
     env:
       BACKEND_URL: ${{ secrets.BACKEND_URL }}
-
-
 
   
