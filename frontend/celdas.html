@@ -133,7 +133,7 @@
         <script>
             // Función para actualizar las celdas
             function actualizarCeldas() {
-                fetch("http://127.0.0.1:3002/api/v1/celdas")
+                fetch("https://arkham-tp-introcamejo.onrender.com/api/v1/celdas")
                     .then((response) => response.json())
                     .then((celdas) => {
                         let tabla = document.getElementById("celdas-data");
@@ -202,7 +202,7 @@
 
             // Función para eliminar una celda
             function eliminarCelda(numero_celda) {
-                fetch(`http://127.0.0.1:3002/api/v1/celdas/${numero_celda}`, {
+                fetch(`https://arkham-tp-introcamejo.onrender.com/api/v1/celdas/${numero_celda}`, {
                     method: "DELETE",
                 })
                     .then((response) => response.json())
@@ -218,7 +218,7 @@
 
             // Función para editar una celda
             function editarCelda(numero_celda) {
-                fetch(`http://127.0.0.1:3002/api/v1/celdas/${numero_celda}`)
+                fetch(`https://arkham-tp-introcamejo.onrender.com/api/v1/celdas/${numero_celda}`)
                     .then((response) => response.json())
                     .then((celda) => {
                         document.getElementById("tipoCelda").value = celda.tipoCelda;
@@ -264,7 +264,7 @@
 
                 if (action === "update") {
                     // Actualizar la celda
-                    fetch(`http://127.0.0.1:3002/api/v1/celdas/${numero_celda}`, {
+                    fetch(`https://arkham-tp-introcamejo.onrender.com/api/v1/celdas/${numero_celda}`, {
                         method: "PUT",
                         headers: {
                             "Content-Type": "application/json",
@@ -282,7 +282,7 @@
                         });
                 } else {
                     // Crear nueva celda
-                    fetch("http://127.0.0.1:3002/api/v1/celdas", {
+                    fetch("https://arkham-tp-introcamejo.onrender.com/api/v1/celdas", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
