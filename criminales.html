@@ -92,7 +92,7 @@
             };
 
             MostrarCriminales = function () {
-                fetch("http://127.0.0.1:3002/api/v1/criminales")
+                fetch("https://arkham-tp-introcamejo.onrender.com/api/v1/criminales")
                     .then((response) => response.json())
                     .then((criminales) => {
                         let contenedorTarjetas = document.getElementById("tarjetas-criminales");
@@ -188,7 +188,7 @@
             }
             borrar_criminal = function (id) {
                 alert("Borrando Criminal ID: " + id);
-                fetch("http://127.0.0.1:3002/api/v1/criminales/" + id, { method: "DELETE" })
+                fetch("https://arkham-tp-introcamejo.onrender.com/api/v1/criminales/" + id, { method: "DELETE" })
                     .then((response) => response.json())
                     .then((response) => {
                         console.log(response);
@@ -215,7 +215,7 @@
                     foto: formulario["foto"].value,
                 };
 
-                fetch(`http://127.0.0.1:3002/api/v1/criminales/${criminalId}`, {
+                fetch(`https://arkham-tp-introcamejo.onrender.com/api/v1/criminales/${criminalId}`, {
                     method: "PUT",
                     headers: {
                         "Content-Type": "application/json",

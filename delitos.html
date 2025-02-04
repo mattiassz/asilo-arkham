@@ -103,7 +103,7 @@
         <script>
             // ACTUALIZAR CONTENIDO DE LA TABLA
             function actualizarDelitos() {
-                fetch("http://127.0.0.1:3002/api/v1/delitos")
+                fetch("https://arkham-tp-introcamejo.onrender.com/api/v1/delitos")
                     .then((response) => response.json())
                     .then((delitos) => {
                         let tabla = document.getElementById("delitos-data");
@@ -164,7 +164,7 @@
                     });
             }
         
-            fetch("http://127.0.0.1:3002/api/v1/criminales")
+            fetch("https://arkham-tp-introcamejo.onrender.com/api/v1/criminales")
                 .then((response) => response.json())
                 .then((criminales) => {
                     let selectCriminal = document.getElementById("criminal_id");
@@ -212,7 +212,7 @@
         
                 if (action === "update") {
                     // ACTUALIZAR DELITO
-                    fetch(`http://127.0.0.1:3002/api/v1/delitos/${numeroDelito}`, {
+                    fetch(`https://arkham-tp-introcamejo.onrender.com/api/v1/delitos/${numeroDelito}`, {
                         method: "PUT",
                         headers: {
                             "Content-Type": "application/json",
@@ -231,7 +231,7 @@
                         });
                 } else {
                     // CREAR DELITO
-                    fetch("http://127.0.0.1:3002/api/v1/delitos", {
+                    fetch("https://arkham-tp-introcamejo.onrender.com/api/v1/delitos", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
@@ -253,7 +253,7 @@
         
             // ELIMINAR DELITO
             function eliminarDelito(numeroDelito) {
-                fetch(`http://127.0.0.1:3002/api/v1/delitos/${numeroDelito}`, {
+                fetch(`https://arkham-tp-introcamejo.onrender.com/api/v1/delitos/${numeroDelito}`, {
                     method: "DELETE",
                 })
                     .then((response) => response.json())
@@ -269,7 +269,7 @@
         
             // EDITAR DELITO
             function editarDelito(numeroDelito) {
-                fetch(`http://127.0.0.1:3002/api/v1/delitos/${numeroDelito}`)
+                fetch(`https://arkham-tp-introcamejo.onrender.com/api/v1/delitos/${numeroDelito}`)
                     .then((response) => response.json())
                     .then((delito) => {
                         document.getElementById("criminal_id").value = delito.criminal_id;

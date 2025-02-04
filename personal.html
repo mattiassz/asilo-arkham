@@ -103,7 +103,7 @@
         <script>
             // Función para actualizar la lista de personal
             function actualizarPersonal() {
-                fetch("http://127.0.0.1:3002/api/v1/personal")
+                fetch("https://arkham-tp-introcamejo.onrender.com/api/v1/personal")
                     .then((response) => response.json())
                     .then((personal) => {
                         let tabla = document.getElementById("personal-data");
@@ -171,7 +171,7 @@
 
                 if (action === "update") {
                     // ACTUALIZAR PERSONAL
-                    fetch(`http://127.0.0.1:3002/api/v1/personal/${dniLaburante}`, {
+                    fetch(`https://arkham-tp-introcamejo.onrender.com/api/v1/personal/${dniLaburante}`, {
                         method: "PUT",
                         headers: {
                             "Content-Type": "application/json",
@@ -190,7 +190,7 @@
                         });
                 } else {
                     // CREAR PERSONAL
-                    fetch("http://127.0.0.1:3002/api/v1/personal", {
+                    fetch("https://arkham-tp-introcamejo.onrender.com/api/v1/personal", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
@@ -211,7 +211,7 @@
 
             // ELIMINAR PERSONAL
             function eliminarLaburante(dniLaburante) {
-                fetch(`http://127.0.0.1:3002/api/v1/personal/${dniLaburante}`, {
+                fetch(`https://arkham-tp-introcamejo.onrender.com/api/v1/personal/${dniLaburante}`, {
                     method: "DELETE",
                 })
                     .then((response) => response.json())
@@ -227,7 +227,7 @@
 
             // EDITAR PERSONAL
             function editarLaburante(dniLaburante) {
-                fetch(`http://127.0.0.1:3002/api/v1/personal/${dniLaburante}`)
+                fetch(`https://arkham-tp-introcamejo.onrender.com/api/v1/personal/${dniLaburante}`)
                     .then((response) => response.json())
                     .then((laburante) => {
                         document.getElementById("dniLaburante").value = laburante.dni;
