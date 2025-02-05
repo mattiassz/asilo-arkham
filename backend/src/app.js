@@ -4,7 +4,7 @@ const app = express()
 const port = 3002;
 
 app.use(cors({
-    origin: 'https://mattiassz.github.io/asilo-arkham/', 
+    origin: ['https://mattiassz.github.io', 'https://mattiassz.github.io/asilo-arkham'], // Agrega más URLs si es necesario
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization']
   }));
