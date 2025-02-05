@@ -2,9 +2,10 @@ const express = require('express')
 const cors = require('cors')
 const app = express()
 const port = 3002;
+console.log("DATABASE_URL:", process.env.DATABASE_URL);
 
 app.use(cors({
-    origin: ['https://mattiassz.github.io', 'https://mattiassz.github.io/asilo-arkham'], // Agrega más URLs si es necesario
+    origin: ['https://mattiassz.github.io', 'https://mattiassz.github.io/asilo-arkham'], 
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization']
   }));
