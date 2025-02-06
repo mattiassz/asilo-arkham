@@ -78,6 +78,7 @@
                     <input type="text" name="foto" id="foto" required /><br />
 
                     <button type="submit">Actualizar</button>
+                    <button type="button" onclick="cancelarEdicion()">Cancelar</button>
                 </form>
             </main>
 
@@ -196,6 +197,10 @@
                         tarjeta.remove();
                     });
             };
+
+            function cancelarEdicion() {
+                document.getElementById("formulario-edicion").style.display = "none";
+            }
 
             function actualizarCriminal(event) {
                 event.preventDefault();
