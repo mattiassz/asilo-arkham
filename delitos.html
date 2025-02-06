@@ -60,8 +60,13 @@
                             <input type="text" id="lugarDelito" name="lugarDelito" required /><br />
 
                             <label for="estadoDelito">Estado del Delito:</label>
-                            <input type="text" id="estadoDelito" name="estadoDelito" required /><br />
-
+                            <select id="estadoDelito" name="estadoDelito" required>
+                                <option value="Federal">Federal</option>
+                                <option value="Estatal">Estatal</option>
+                                <option value="Internacional">Internacional</option>
+                               <option value="Militar">Militar</option>
+                            </select>                            
+                            
                             <label for="prioridad">Prioridad:</label>
                             <select id="prioridad" name="prioridad" required>
                                 <option value="baja">Baja</option>
