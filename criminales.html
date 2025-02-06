@@ -78,6 +78,7 @@
                     <input type="text" name="foto" id="foto" required /><br />
 
                     <button type="submit">Actualizar</button>
+                    <button type="button" onclick="cancelarEdicion()">Cancelar</button>
                 </form>
             </main>
 
@@ -185,11 +186,6 @@
                 document.getElementById("personal_asignado").value = criminal.personal_asignado;
                 document.getElementById("celda").value = criminal.celda;
                 document.getElementById("foto").value = criminal.foto;
-                   
-                document.getElementById("formulario-edicion").scrollIntoView({
-                    behavior: "smooth",
-                    block: "start"
-                });
             }
             borrar_criminal = function (id) {
                 alert("Borrando Criminal ID: " + id);
@@ -201,6 +197,10 @@
                         tarjeta.remove();
                     });
             };
+
+            function cancelarEdicion() {
+                document.getElementById("formulario-edicion").style.display = "none";
+            }
 
             function actualizarCriminal(event) {
                 event.preventDefault();
