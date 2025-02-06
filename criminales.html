@@ -185,6 +185,11 @@
                 document.getElementById("personal_asignado").value = criminal.personal_asignado;
                 document.getElementById("celda").value = criminal.celda;
                 document.getElementById("foto").value = criminal.foto;
+                   
+                document.getElementById("formulario-edicion").scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
             }
             borrar_criminal = function (id) {
                 alert("Borrando Criminal ID: " + id);
