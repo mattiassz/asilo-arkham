@@ -52,7 +52,23 @@
 
 			<footer>
 				<p>hecho por batman</p>
+				<button id="baticumbiaBtn" onmousedown="estadoBaticumbia()">Baticumbia OFF</button>
 			</footer>
+			<script type="text/javascript">
+			  var batiCumbia = new Audio('static/audio/bati-cumbia.mp4');
+			
+			  function estadoBaticumbia() {
+			    var btn = document.getElementById("baticumbiaBtn");
+			
+			    if (batiCumbia.paused) {
+			      batiCumbia.play();
+			      btn.innerText = "Baticumbia ON";  
+			    } else {
+			      batiCumbia.pause();  
+			      btn.innerText = "Baticumbia OFF";
+			    }
+			  }
+			</script>
 		</div>
 	</body>
 </html>
