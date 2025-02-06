@@ -292,7 +292,10 @@
                         document.getElementById("formDelito").dataset.numeroDelito = numeroDelito;
         
                         document.getElementById("formularioDelito").style.display = "block";
-                        document.getElementById("formularioDelito").scrollIntoView({ behavior: "smooth" });
+                        document.getElementById("formularioDelito").scrollIntoView({
+                            behavior: "smooth",
+                            block: "start"
+                        });
 
                     });
             }
