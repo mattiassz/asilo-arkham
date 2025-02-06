@@ -187,7 +187,10 @@
                 document.getElementById("celda").value = criminal.celda;
                 document.getElementById("foto").value = criminal.foto;
                 
-                document.getElementById("formulario-edicion").scrollIntoView({ behavior: 'smooth' });
+                document.getElementById("formulario-edicion").scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
                 
             }
             borrar_criminal = function (id) {
