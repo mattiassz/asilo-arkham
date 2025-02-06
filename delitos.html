@@ -48,7 +48,8 @@
                             <br />
 
                             <label for="descripcion">Descripción:</label>
-                            <textarea id="descripcion" name="descripcion" required></textarea><br />
+                            <input type="text" id="descripcion" name="descripcion" required required pattern="^[a-zA-ZáéíóúÁÉÍÓÚ\s.,]+$" />
+
 
                             <label for="fecha">Fecha:</label>
                             <input type="date" id="fecha" name="fecha" required /><br />

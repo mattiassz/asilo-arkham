@@ -56,7 +56,7 @@
                             </select>
 
                             <label for="descripcionCelda">Descripcion de Celda:</label>
-                            <input type="text" id="descripcionCelda" name="descripcionCelda" required /><br />
+                            <input type="text" id="descripcionCelda" name="descripcionCelda" required required pattern="^[a-zA-ZáéíóúÁÉÍÓÚ\s.,]+$" />
 
                             <label for="nivelSeguridad">Nivel de Seguridad:</label>
                             <select id="nivelSeguridad" name="nivelSeguridad" required>
