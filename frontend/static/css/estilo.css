@@ -201,47 +201,6 @@ footer p {
     letter-spacing: 1px;
 }
 
-/*LISTA DELITOS*/
-.seccion-delitos {
-    margin-top: 30px;
-    padding: 25px;
-    background-color: #212121;
-    border-radius: 10px;
-    border: 1px solid #333;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
-}
-
-.lista-delitos {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.lista-delitos li {
-    padding: 15px;
-    margin-bottom: 10px;
-    background-color: #181818;
-    color: #f5f5f5;
-    border-left: 5px solid #00bcd4;
-    border-radius: 5px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.lista-delitos li:hover {
-    transform: scale(1.02);
-}
-
-.lista-delitos .nombre {
-    font-weight: bold;
-    color: #00bcd4;
-}
-
-.lista-delitos .apodo {
-    font-style: italic;
-    color: #bbb;
-}
-
 /*TARJETAS DE CRIMINALES */
 .tarjetas-criminales {
     margin-top: 30px;
