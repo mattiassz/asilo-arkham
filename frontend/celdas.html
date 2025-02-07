@@ -194,9 +194,31 @@
                             tr.appendChild(capacidad);
                             tr.appendChild(numero_celda);
                             tr.appendChild(acciones); // Añadir la columna de acciones
+                            
+                        fetch(`https://arkham-tp-introcamejo.onrender.com/api/v1/celdas/${parseInt(celda.numero_celda)}/criminales`)
+                                .then(response => response.json())
+                                .then(data => {
+                                    let criminales_asociados = document.createElement('td');
+                                    if (data.length > 0) {
+                                        criminales_asociados.textContent = data.map(c => c.nombre).join(", ");
+                                    } else {
+                                        criminales_asociados.textContent = "Ninguno";
+                                    }
+                                    
+                                    tr.appendChild(criminales_asociados); // Agregar el td a la fila
 
-                            tabla.appendChild(tr);
-                        });
+                                    tabla.appendChild(tr); // Ahora la fila se agrega completa con criminales
+                                })
+                                .catch(error => {
+                                    console.error("Error al obtener criminales asociados:", error);
+                                    let criminales_asociados = document.createElement('td');
+                                    criminales_asociados.textContent = "Error al cargar";
+                                    tr.appendChild(criminales_asociados);
+                                    tabla.appendChild(tr); // Aseguramos que la fila siempre se agregue
+                                });
+                            });
+
+                        
                     })
                     .catch((error) => {
                         console.error("Error al actualizar la lista de Celdas:", error);
