@@ -116,46 +116,55 @@
                     .then((delitos) => {
                         let tabla = document.getElementById("delitos-data");
                         tabla.innerHTML = ""; 
+                        
                         delitos.forEach((delito) => {
                             let tr = document.createElement("tr");
-        
-                            let criminal_id = document.createElement("td");
-                            criminal_id.textContent = delito.criminal_id ;
-        
+            
+                            let nombre_criminal = document.createElement("td");
+                            
+                            
+                            fetch(`https://arkham-tp-introcamejo.onrender.com/api/v1/delitos/criminal/${delito.criminal_id}`)
+                                .then((res) => res.json())
+                                .then((data) => {
+                                    nombre_criminal.textContent = data.nombre || "Desconocido";
+                                })
+                                .catch((error) => {
+                                    console.error("Error al obtener el nombre del criminal:", error);
+                                    nombre_criminal.textContent = "Error";
+                                });
+            
                             let descripcion = document.createElement("td");
                             descripcion.textContent = delito.descripcion;
                             descripcion.className = "td-descripcion"; 
-        
+            
                             let fecha = document.createElement("td");
                             fecha.textContent = delito.fecha;
-        
+            
                             let sentencia_judicial = document.createElement("td");
                             sentencia_judicial.textContent = delito.sentencia_judicial;
-        
+            
                             let lugarDelito = document.createElement("td");
                             lugarDelito.textContent = delito.lugarDelito;
-        
+            
                             let estadoDelito = document.createElement("td");
                             estadoDelito.textContent = delito.estadoDelito;
-        
+            
                             let nivelPrioridad = document.createElement("td");
                             nivelPrioridad.textContent = delito.nivelPrioridad;
-        
-                            // COLUMNA DE ACCIONES CON BOTONES
+            
                             let acciones = document.createElement("td");
-        
-                            
+            
                             let editarBtn = document.createElement("button");
                             editarBtn.textContent = "Editar";
                             editarBtn.onclick = () => editarDelito(delito.numero_delito);
                             acciones.appendChild(editarBtn);
-        
+            
                             let eliminarBtn = document.createElement("button");
                             eliminarBtn.textContent = "Eliminar";
                             eliminarBtn.onclick = () => eliminarDelito(delito.numero_delito);
                             acciones.appendChild(eliminarBtn);
-        
-                            tr.appendChild(criminal_id);
+            
+                            tr.appendChild(nombre_criminal); 
                             tr.appendChild(descripcion);
                             tr.appendChild(fecha);
                             tr.appendChild(sentencia_judicial);
@@ -163,7 +172,7 @@
                             tr.appendChild(estadoDelito);
                             tr.appendChild(nivelPrioridad);
                             tr.appendChild(acciones); 
-        
+            
                             tabla.appendChild(tr);
                         });
                     })
@@ -171,6 +180,7 @@
                         console.error("Error al actualizar la lista de delitos:", error);
                     });
             }
+            
         
             fetch("https://arkham-tp-introcamejo.onrender.com/api/v1/criminales")
                 .then((response) => response.json())

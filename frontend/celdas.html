@@ -120,7 +120,6 @@
                                     <th>Piso</th>
                                     <th>Capacidad</th>
                                     <th>Numero de Celda</th>
-                                    <th>Criminal Asociado</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
@@ -141,7 +140,7 @@
                     .then((response) => response.json())
                     .then((celdas) => {
                         let tabla = document.getElementById("celdas-data");
-                        tabla.innerHTML = "";
+                        tabla.innerHTML = ""; // Limpiar la tabla antes de actualizar
                         celdas.forEach((celda) => {
                             let tr = document.createElement("tr");
 
@@ -172,53 +171,54 @@
                             let numero_celda = document.createElement("td");
                             numero_celda.textContent = celda.numero_celda;
 
-                            let criminales_asociados = document.createElement('td');
+                            // COLUMNA DE ACCIONES
+                            let acciones = document.createElement("td");
 
-                            fetch(`https://arkham-tp-introcamejo.onrender.com/api/v1/celdas/${parseInt(celda.numero_celda)}/criminales`)
+                            let editarBtn = document.createElement("button");
+                            editarBtn.textContent = "Editar";
+                            editarBtn.onclick = () => editarCelda(celda.numero_celda);
+                            acciones.appendChild(editarBtn);
+
+                            let eliminarBtn = document.createElement("button");
+                            eliminarBtn.textContent = "Eliminar";
+                            eliminarBtn.onclick = () => eliminarCelda(celda.numero_celda);
+                            acciones.appendChild(eliminarBtn);
+
+                            tr.appendChild(tipoCelda);
+                            tr.appendChild(descripcionCelda);
+                            tr.appendChild(nivelSeguridad);
+                            tr.appendChild(camarasSeguridad);
+                            tr.appendChild(sensoresMovimiento);
+                            tr.appendChild(alarmas);
+                            tr.appendChild(piso);
+                            tr.appendChild(capacidad);
+                            tr.appendChild(numero_celda);
+                            tr.appendChild(acciones); // Añadir la columna de acciones
+                            
+                        fetch(`https://arkham-tp-introcamejo.onrender.com/api/v1/celdas/${parseInt(celda.numero_celda)}/criminales`)
                                 .then(response => response.json())
                                 .then(data => {
+                                    let criminales_asociados = document.createElement('td');
                                     if (data.length > 0) {
                                         criminales_asociados.textContent = data.map(c => c.nombre).join(", ");
                                     } else {
                                         criminales_asociados.textContent = "Ninguno";
                                     }
                                     
-                                    tr.appendChild(tipoCelda);
-                                    tr.appendChild(descripcionCelda);
-                                    tr.appendChild(nivelSeguridad);
-                                    tr.appendChild(camarasSeguridad);
-                                    tr.appendChild(sensoresMovimiento);
-                                    tr.appendChild(alarmas);
-                                    tr.appendChild(piso);
-                                    tr.appendChild(capacidad);
-                                    tr.appendChild(numero_celda);
-                                    tr.appendChild(criminales_asociados);
+                                    tr.appendChild(criminales_asociados); // Agregar el td a la fila
 
-                                    // COLUMNA DE ACCIONES
-                                    let acciones = document.createElement("td");
-
-                                    let editarBtn = document.createElement("button");
-                                    editarBtn.textContent = "Editar";
-                                    editarBtn.onclick = () => editarCelda(celda.numero_celda);
-                                    acciones.appendChild(editarBtn);
-
-                                    let eliminarBtn = document.createElement("button");
-                                    eliminarBtn.textContent = "Eliminar";
-                                    eliminarBtn.onclick = () => eliminarCelda(celda.numero_celda);
-                                    acciones.appendChild(eliminarBtn);
-
-                                    tr.appendChild(acciones);
-                                    tabla.appendChild(tr);
+                                    tabla.appendChild(tr); // Ahora la fila se agrega completa con criminales
                                 })
-                                
                                 .catch(error => {
-                                console.error("Error al obtener criminales asociados:", error);
-                                criminales_asociados.textContent = "Error al cargar";
-                                tr.appendChild(criminales_asociados);
-                                tr.appendChild(acciones);  // Si hay error, sigue añadiendo los botones
-                                tabla.appendChild(tr);
-                                });                            
-                            });                        
+                                    console.error("Error al obtener criminales asociados:", error);
+                                    let criminales_asociados = document.createElement('td');
+                                    criminales_asociados.textContent = "Error al cargar";
+                                    tr.appendChild(criminales_asociados);
+                                    tabla.appendChild(tr); // Aseguramos que la fila siempre se agregue
+                                });
+                            });
+
+                        
                     })
                     .catch((error) => {
                         console.error("Error al actualizar la lista de Celdas:", error);

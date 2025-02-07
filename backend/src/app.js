@@ -391,6 +391,25 @@ app.put('/api/v1/delitos/:numero_delito', async (req,res)=>{
 })
 
 
+app.get('/api/v1/delitos/criminal/:criminal_id', async (req, res) => {
+    try {
+        const criminal = await prisma.criminal.findUnique({
+            where: { id: parseInt(req.params.criminal_id) },
+            select: { nombre: true } 
+        });
+
+        if (!criminal) {
+            return res.status(404).send({ error: 'Criminal no encontrado' });
+        }
+
+        res.send(criminal);
+    } catch (error) {
+        console.error('Error obteniendo nombre del criminal:', error);
+        res.status(500).send({ error: 'Error interno del servidor' });
+    }
+});
+
+
 
 
 ///////////////////////////// Celdas  /////////////////////////////
