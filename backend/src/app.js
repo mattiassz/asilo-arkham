@@ -499,7 +499,7 @@ app.get('/api/v1/celdas/:numero_celda/criminales', async (req, res) => {
             return res.status(404).send({ error: 'Celda no encontrada' });
         }
 
-        res.send(personal.criminales); // Devuelve la lista de criminales asociados
+        res.send(celda.criminales); // Devuelve la lista de criminales asociados
     } catch (error) {
         console.error('Error obteniendo criminales:', error);
         res.status(500).send({ error: 'Error interno del servidor' });
