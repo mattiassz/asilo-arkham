@@ -163,7 +163,7 @@
                             tr.appendChild(turno);
                             tr.appendChild(contacto);
                             tr.appendChild(acciones);
-                            fetch(`https://arkham-tp-introcamejo.onrender.com/api/v1/personal/${laburante.dni}/criminales`)
+                            fetch(`https://arkham-tp-introcamejo.onrender.com/api/v1/personal/${parseInt(laburante.dni)}/criminales`)
                                 .then(response => response.json())
                                 .then(data => {
                                     let criminales_asociados = document.createElement('td');
