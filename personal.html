@@ -52,6 +52,7 @@
                             <label for="rolLaburante">Rol:</label>
                             <select id="rolLaburante" name="rolLaburante" required>
                                 <option value="" disabled selected>Selecciona una opción</option>
+<<<<<<< HEAD
                                 <option value="Psicologo">Psicologo</option>
                                 <option value="Terapeuta">Terapeuta</option>
                                 <option value="Psiquiatra">Psiquiatra</option>
@@ -59,6 +60,15 @@
                                 <option value="Guardia de Seguridad">Guardia de seguridad</option>
                                 <option value="Vigilante">Vigilante</option>
                                 <option value="Otro">Otro</option>
+=======
+                                <option value="psicologo">Piscologo</option>
+                                <option value="terapeuta">Terapeuta</option>
+                                <option value="psiquiatra">Psiquiatra</option>
+                                <option value="medico">Medico</option>
+                                <option value="guardia-seguridad">Guardia de seguridad</option>
+                                <option value="vigilante">Vigilante</option>
+                                <option value="otro">Otro</option>
+>>>>>>> 04b343c (Cambios para la reentrega)
                             </select>
 
                             <label for="turnoLaburante">Turno:</label>
@@ -104,6 +114,10 @@
             </footer>
         </div>
         <script>
+
+
+            
+
             // Función para actualizar la lista de personal
             function actualizarPersonal() {
                 fetch("https://arkham-tp-introcamejo.onrender.com/api/v1/personal")
@@ -129,6 +143,7 @@
                             let contacto = document.createElement("td");
                             contacto.textContent = laburante.contacto;
 
+
                             // COLUMNA DE ACCIONES CON BOTONES
                             let acciones = document.createElement("td");
 
@@ -148,10 +163,31 @@
                             tr.appendChild(turno);
                             tr.appendChild(contacto);
                             tr.appendChild(acciones);
+                            fetch(`https://arkham-tp-introcamejo.onrender.com/api/v1/personal/${laburante.dni}/criminales`)
+                                .then(response => response.json())
+                                .then(data => {
+                                    let criminales_asociados = document.createElement('td');
+                                    if (data.length > 0) {
+                                        criminales_asociados.textContent = data.map(c => c.nombre).join(", ");
+                                    } else {
+                                        criminales_asociados.textContent = "Ninguno";
+                                    }
+                                    
+                                    tr.appendChild(criminales_asociados); // Agregar el td a la fila
 
-                            tabla.appendChild(tr);
+                                    tabla.appendChild(tr); // Ahora la fila se agrega completa con criminales
+                                })
+                                .catch(error => {
+                                    console.error("Error al obtener criminales asociados:", error);
+                                    let criminales_asociados = document.createElement('td');
+                                    criminales_asociados.textContent = "Error al cargar";
+                                    tr.appendChild(criminales_asociados);
+                                    tabla.appendChild(tr); // Aseguramos que la fila siempre se agregue
+                                });
+
                         });
                     })
+
                     .catch((error) => {
                         console.error("Error al actualizar el personal:", error);
                     });
