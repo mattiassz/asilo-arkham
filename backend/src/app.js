@@ -257,6 +257,29 @@ app.put('/api/v1/personal/:dni', async (req,res)=> {  //modificar alguien del pe
 
 
 
+app.get('/api/v1/personal/:dni/criminales', async (req, res) => {
+    try {
+        const dni = parseInt(req.params.dni);
+
+        const personal = await prisma.personal.findUnique({
+            where: { dni },
+            include: { criminales: true } // Incluir la relación con criminales
+        });
+
+        if (!personal) {
+            return res.status(404).json({ error: 'Personal no encontrado' });
+        }
+
+        res.json(personal.criminales); // Devuelve la lista de criminales asociados
+    } catch (error) {
+        console.error('Error obteniendo criminales:', error);
+        res.status(500).send({ error: 'Error interno del servidor' });
+    }
+});
+
+
+
+
 /////////////////////////////////////  delitos   //////////////////////////////////////////////////////
 
 
