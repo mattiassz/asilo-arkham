@@ -270,7 +270,7 @@ app.get('/api/v1/personal/:dni/criminales', async (req, res) => {
             return res.status(404).json({ error: 'Personal no encontrado' });
         }
 
-        res.json(personal.criminales); // Devuelve la lista de criminales asociados
+        res.send(personal.criminales); // Devuelve la lista de criminales asociados
     } catch (error) {
         console.error('Error obteniendo criminales:', error);
         res.status(500).send({ error: 'Error interno del servidor' });
@@ -482,6 +482,30 @@ app.post('/api/v1/celdas', async (req,res)=>{
     })
     res.send(celda)
 })
+
+
+
+
+app.get('/api/v1/personal/:numero_celda/criminales', async (req, res) => {
+    try {
+        const numero_celda = parseInt(req.params.numero_celda);
+
+        const celda = await prisma.celda.findUnique({
+            where: { numero_celda },
+            include: { criminales: true } // Incluir la relación con criminales
+        });
+
+        if (!celda) {
+            return res.status(404).send({ error: 'Celda no encontrada' });
+        }
+
+        res.send(personal.criminales); // Devuelve la lista de criminales asociados
+    } catch (error) {
+        console.error('Error obteniendo criminales:', error);
+        res.status(500).send({ error: 'Error interno del servidor' });
+    }
+});
+
 
 
 
