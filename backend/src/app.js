@@ -486,7 +486,7 @@ app.post('/api/v1/celdas', async (req,res)=>{
 
 
 
-app.get('/api/v1/personal/:numero_celda/criminales', async (req, res) => {
+app.get('/api/v1/celdas/:numero_celda/criminales', async (req, res) => {
     try {
         const numero_celda = parseInt(req.params.numero_celda);
 
