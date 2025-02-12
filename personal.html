@@ -90,8 +90,8 @@
                                 <th>Rol</th>
                                 <th>Turno</th>
                                 <th>Contacto</th>
-                                <th>Acciones</th>
                                 <th>Criminales Asociados</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody id="personal-data"></tbody>
@@ -134,7 +134,7 @@
                             let contacto = document.createElement("td");
                             contacto.textContent = laburante.contacto;
 
-                            let criminalesAsociados = document.createElement('td')
+                            let criminalesAsociados = document.createElement('td');
 
                             fetch(`https://arkham-tp-introcamejo.onrender.com/api/v1/personal/${parseInt(laburante.dni)}/criminales`)
                                 .then(response => response.json())
