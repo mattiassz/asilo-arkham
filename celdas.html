@@ -183,46 +183,42 @@
                                         criminales_asociados.textContent = "Ninguno";
                                     }
                                     
+                                    tr.appendChild(tipoCelda);
+                                    tr.appendChild(descripcionCelda);
+                                    tr.appendChild(nivelSeguridad);
+                                    tr.appendChild(camarasSeguridad);
+                                    tr.appendChild(sensoresMovimiento);
+                                    tr.appendChild(alarmas);
+                                    tr.appendChild(piso);
+                                    tr.appendChild(capacidad);
+                                    tr.appendChild(numero_celda);
                                     tr.appendChild(criminales_asociados);
 
+                                    // COLUMNA DE ACCIONES
+                                    let acciones = document.createElement("td");
+
+                                    let editarBtn = document.createElement("button");
+                                    editarBtn.textContent = "Editar";
+                                    editarBtn.onclick = () => editarCelda(celda.numero_celda);
+                                    acciones.appendChild(editarBtn);
+
+                                    let eliminarBtn = document.createElement("button");
+                                    eliminarBtn.textContent = "Eliminar";
+                                    eliminarBtn.onclick = () => eliminarCelda(celda.numero_celda);
+                                    acciones.appendChild(eliminarBtn);
+
+                                    tr.appendChild(acciones);
                                     tabla.appendChild(tr);
                                 })
+                                
                                 .catch(error => {
-                                    console.error("Error al obtener criminales asociados:", error);
-                                    criminales_asociados.textContent = "Error al cargar";
-                                    tr.appendChild(criminales_asociados);
-                                    tabla.appendChild(tr);
-                                });
-
-                            // COLUMNA DE ACCIONES
-                            let acciones = document.createElement("td");
-
-                            let editarBtn = document.createElement("button");
-                            editarBtn.textContent = "Editar";
-                            editarBtn.onclick = () => editarCelda(celda.numero_celda);
-                            acciones.appendChild(editarBtn);
-
-                            let eliminarBtn = document.createElement("button");
-                            eliminarBtn.textContent = "Eliminar";
-                            eliminarBtn.onclick = () => eliminarCelda(celda.numero_celda);
-                            acciones.appendChild(eliminarBtn);
-
-                            tr.appendChild(tipoCelda);
-                            tr.appendChild(descripcionCelda);
-                            tr.appendChild(nivelSeguridad);
-                            tr.appendChild(camarasSeguridad);
-                            tr.appendChild(sensoresMovimiento);
-                            tr.appendChild(alarmas);
-                            tr.appendChild(piso);
-                            tr.appendChild(capacidad);
-                            tr.appendChild(numero_celda);
-                            tr.appendChild(acciones);
-
-                            
-
-                            });
-
-                        
+                                console.error("Error al obtener criminales asociados:", error);
+                                criminales_asociados.textContent = "Error al cargar";
+                                tr.appendChild(criminales_asociados);
+                                tr.appendChild(acciones);  // Si hay error, sigue añadiendo los botones
+                                tabla.appendChild(tr);
+                                });                            
+                            });                        
                     })
                     .catch((error) => {
                         console.error("Error al actualizar la lista de Celdas:", error);
