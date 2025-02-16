@@ -107,8 +107,7 @@
                             let contenido = document.createElement("div");
                             contenido.classList.add("contenido");
 
-                            let id_criminal = document.createElement("p")
-                            id_criminal.textContent = criminal.id
+
 
                             let nombre = document.createElement("h3");
                             nombre.classList.add("nombre");
@@ -160,7 +159,6 @@
                             editar.onclick = function () {
                                 mostrarFormularioEdicion(criminal);
                             };
-                            contenido.appendChild(id_criminal)
                             contenido.appendChild(nombre);
                             contenido.appendChild(apodo);
                             contenido.appendChild(edad);
