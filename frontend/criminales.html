@@ -136,11 +136,11 @@
 
                             let personal_asignado = document.createElement("p");
                             personal_asignado.classList.add("descripcion");
-                            personal_asignado.textContent = `Personal Asignado: ${criminal.personal_asignado ? criminal.personal_asignado : "Ninguno"}`;
+                            personal_asignado.textContent = `Personal Asignado: ${criminal.personal_asignado ? criminal.personal_asignado : "Por Asignar"}`;
 
                             let celda = document.createElement("p");
                             celda.classList.add("descripcion");
-                            celda.textContent = `Celda: ${criminal.celda ? criminal.celda : "Ninguna"}`;
+                            celda.textContent = `Celda: ${criminal.celda ? criminal.celda : "Por Asignar"}`;
 
                             let foto = document.createElement("img");
                             foto.setAttribute("src", criminal.foto);
