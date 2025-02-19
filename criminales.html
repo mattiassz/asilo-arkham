@@ -136,7 +136,7 @@
 
                             let personal_asignado = document.createElement("p");
                             personal_asignado.classList.add("descripcion");
-                            personal_asignado.textContent = `Personal Asignado: ${criminal.personal_asignado}`;
+                            personal_asignado.textContent = `Personal Asignado: ${criminal.personal_asignado ? criminal.personal_asignado : "Ninguno"}`;
 
                             let celda = document.createElement("p");
                             celda.classList.add("descripcion");
