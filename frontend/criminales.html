@@ -140,7 +140,7 @@
 
                             let celda = document.createElement("p");
                             celda.classList.add("descripcion");
-                            celda.textContent = `Celda: ${criminal.celda}`;
+                            celda.textContent = `Celda: ${criminal.celda ? criminal.celda : "Ninguna"}`;
 
                             let foto = document.createElement("img");
                             foto.setAttribute("src", criminal.foto);
