@@ -154,7 +154,7 @@
                             nivelSeguridad.textContent = celda.nivelSeguridad;
 
                             let camarasSeguridad = document.createElement("td");
-                            camarasSeguridad.textContent = celda.camarasSeguridad;
+                            camarasSeguridad.textContent = celda.camarasSeguridad ? "Si" : "No";
 
                             let sensoresMovimiento = document.createElement("td");
                             sensoresMovimiento.textContent = celda.sensoresMovimiento;
