@@ -120,6 +120,7 @@
                                     <th>Piso</th>
                                     <th>Capacidad</th>
                                     <th>Numero de Celda</th>
+                                    <th>Criminales Asociados</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
@@ -171,57 +172,56 @@
                             let numero_celda = document.createElement("td");
                             numero_celda.textContent = celda.numero_celda;
 
-                            // COLUMNA DE ACCIONES
-                            let acciones = document.createElement("td");
-
-                            let editarBtn = document.createElement("button");
-                            editarBtn.textContent = "Editar";
-                            editarBtn.onclick = () => editarCelda(celda.numero_celda);
-                            acciones.appendChild(editarBtn);
-
-                            let eliminarBtn = document.createElement("button");
-                            eliminarBtn.textContent = "Eliminar";
-                            eliminarBtn.onclick = () => eliminarCelda(celda.numero_celda);
-                            acciones.appendChild(eliminarBtn);
-
-                            tr.appendChild(tipoCelda);
-                            tr.appendChild(descripcionCelda);
-                            tr.appendChild(nivelSeguridad);
-                            tr.appendChild(camarasSeguridad);
-                            tr.appendChild(sensoresMovimiento);
-                            tr.appendChild(alarmas);
-                            tr.appendChild(piso);
-                            tr.appendChild(capacidad);
-                            tr.appendChild(numero_celda);
-                            tr.appendChild(acciones); // Añadir la columna de acciones
-                            
-                        fetch(`https://arkham-tp-introcamejo.onrender.com/api/v1/celdas/${parseInt(celda.numero_celda)}/criminales`)
+                            let criminalesAsociados = document.createElement('td');
+                            fetch(`https://arkham-tp-introcamejo.onrender.com/api/v1/celdas/${celda.id}/criminales`)
                                 .then(response => response.json())
                                 .then(data => {
-                                    let criminales_asociados = document.createElement('td');
                                     if (data.length > 0) {
-                                        criminales_asociados.textContent = data.map(c => c.nombre).join(", ");
+                                        criminalesAsociados.textContent = data.map(c => c.nombre).join(", ");
                                     } else {
-                                        criminales_asociados.textContent = "Ninguno";
+                                        criminalesAsociados.textContent = "Ninguno";
                                     }
-                                    
-                                    tr.appendChild(criminales_asociados); // Agregar el td a la fila
 
-                                    tabla.appendChild(tr); // Ahora la fila se agrega completa con criminales
+                                    tr.appendChild(tipoCelda);
+                                    tr.appendChild(descripcionCelda);
+                                    tr.appendChild(nivelSeguridad);
+                                    tr.appendChild(camarasSeguridad);
+                                    tr.appendChild(sensoresMovimiento);
+                                    tr.appendChild(alarmas);                  
+                                    tr.appendChild(piso);                
+                                    tr.appendChild(capacidad);
+                                    tr.appendChild(numero_celda);                          
+                                    tr.appendChild(criminalesAsociados);
+
+                                    // COLUMNA DE ACCIONES CON BOTONES
+                                    let acciones = document.createElement("td");
+
+                                    let editarBtn = document.createElement("button");
+                                    editarBtn.textContent = "Editar";
+                                    editarBtn.onclick = () => editarCelda(celda.numero_celda);
+                                    acciones.appendChild(editarBtn);
+
+                                    let eliminarBtn = document.createElement("button");
+                                    eliminarBtn.textContent = "Eliminar";
+                                    eliminarBtn.onclick = () => eliminarCelda(celda.numero_celda);
+                                    acciones.appendChild(eliminarBtn);
+
+                                    tr.appendChild(acciones);
+
+                                    tabla.appendChild(tr); 
                                 })
                                 .catch(error => {
                                     console.error("Error al obtener criminales asociados:", error);
-                                    let criminales_asociados = document.createElement('td');
-                                    criminales_asociados.textContent = "Error al cargar";
-                                    tr.appendChild(criminales_asociados);
-                                    tabla.appendChild(tr); // Aseguramos que la fila siempre se agregue
-                                });
-                            });
-
-                        
+                                    criminalesAsociados.textContent = "Error al cargar";
+                                    tr.appendChild(criminalesAsociados);
+                                    tr.appendChild(acciones); 
+                                    tabla.appendChild(tr);
+                                });                            
+                        });
                     })
+
                     .catch((error) => {
-                        console.error("Error al actualizar la lista de Celdas:", error);
+                        console.error("Error al actualizar la tabla de celdas:", error);
                     });
             }
 
