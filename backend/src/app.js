@@ -173,7 +173,11 @@ app.put('/api/v1/criminales/:id', async (req,res)=> {
 
 
 app.get('/api/v1/personal', async (req,res)=>{ //traer todo el personal
-    const personal = await prisma.personal.findMany()
+    const personal = await prisma.personal.findMany({
+        orderBy: {
+            dni: 'asc'
+        }
+    })
     res.send(personal)
 })
 
