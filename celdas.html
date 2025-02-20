@@ -36,7 +36,12 @@
                 </section>
                 <section class="secciones">
                     <p class="titulos">Celdas de Arkham</p>
-                    <p>Las celdas del Asilo Arkham están diseñadas con un enfoque en la seguridad y el control absoluto de los pacientes que requieren atención intensiva. Cada celda está equipada con tecnología avanzada para monitorear constantemente el bienestar y el comportamiento de los internos. El diseño austero y funcional permite un entorno de máxima seguridad, a la vez que ofrece a los pacientes las condiciones mínimas necesarias para su tratamiento. A pesar de su naturaleza estricta, nuestras celdas están orientadas a promover una rehabilitación efectiva, permitiendo a los pacientes acceder a terapias específicas adaptadas a sus necesidades individuales, siempre y cuando se pueda.</p>
+                    <p>
+                        Las celdas del Asilo Arkham están diseñadas con un enfoque en la seguridad y el control absoluto de los pacientes que requieren atención intensiva. Cada celda está equipada con tecnología avanzada para monitorear
+                        constantemente el bienestar y el comportamiento de los internos. El diseño austero y funcional permite un entorno de máxima seguridad, a la vez que ofrece a los pacientes las condiciones mínimas necesarias para su
+                        tratamiento. A pesar de su naturaleza estricta, nuestras celdas están orientadas a promover una rehabilitación efectiva, permitiendo a los pacientes acceder a terapias específicas adaptadas a sus necesidades
+                        individuales, siempre y cuando se pueda.
+                    </p>
                     <button id="mostrarFormulario">¡Cargar Celda!</button>
 
                     <!-- FORMULARIO OCULTO -->
@@ -103,7 +108,6 @@
                         </form>
                     </div>
                 </section>
-
 
                 <section class="secciones">
                     <p class="titulos">Celdas</p>
@@ -172,12 +176,12 @@
                             let numero_celda = document.createElement("td");
                             numero_celda.textContent = celda.numero_celda;
 
-                            let criminalesAsociados = document.createElement('td');
+                            let criminalesAsociados = document.createElement("td");
                             fetch(`https://arkham-tp-introcamejo.onrender.com/api/v1/celdas/${parseInt(celda.numero_celda)}/criminales`)
-                                .then(response => response.json())
-                                .then(data => {
+                                .then((response) => response.json())
+                                .then((data) => {
                                     if (data.length > 0) {
-                                        criminalesAsociados.textContent = data.map(c => c.nombre).join(", ");
+                                        criminalesAsociados.textContent = data.map((c) => c.nombre).join(", ");
                                     } else {
                                         criminalesAsociados.textContent = "Ninguno";
                                     }
@@ -187,10 +191,10 @@
                                     tr.appendChild(nivelSeguridad);
                                     tr.appendChild(camarasSeguridad);
                                     tr.appendChild(sensoresMovimiento);
-                                    tr.appendChild(alarmas);                  
-                                    tr.appendChild(piso);                
+                                    tr.appendChild(alarmas);
+                                    tr.appendChild(piso);
                                     tr.appendChild(capacidad);
-                                    tr.appendChild(numero_celda);                          
+                                    tr.appendChild(numero_celda);
                                     tr.appendChild(criminalesAsociados);
 
                                     // COLUMNA DE ACCIONES CON BOTONES
@@ -208,15 +212,15 @@
 
                                     tr.appendChild(acciones);
 
-                                    tabla.appendChild(tr); 
+                                    tabla.appendChild(tr);
                                 })
-                                .catch(error => {
+                                .catch((error) => {
                                     console.error("Error al obtener criminales asociados:", error);
                                     criminalesAsociados.textContent = "Error al cargar";
                                     tr.appendChild(criminalesAsociados);
-                                    tr.appendChild(acciones); 
+                                    tr.appendChild(acciones);
                                     tabla.appendChild(tr);
-                                });                            
+                                });
                         });
                     })
 
@@ -225,6 +229,24 @@
                     });
             }
 
+            //TOPE de capacidad de celdas
+            fetch("https://arkham-tp-introcamejo.onrender.com/api/v1/celdas")
+                .then((response) => response.json())
+                .then((celdas) => {
+                    let select = document.getElementById("celdas");
+
+                    celdas.forEach((celda) => {
+                        let criminalesAsignados = celda.criminales_asignados;
+                        let capacidad = celda.capacidad;
+
+                        if (criminalesAsignados < capacidad) {
+                            let option = document.createElement("option");
+                            option.value = celda.numero_celda;
+                            option.textContent = `Celda N°: ${celda.numero_celda} (Capacidad: ${capacidad}, Criminales Asignados: ${criminalesAsignados})`;
+                            select.appendChild(option);
+                        }
+                    });
+                });
             // Función para eliminar una celda
             function eliminarCelda(numero_celda) {
                 fetch(`https://arkham-tp-introcamejo.onrender.com/api/v1/celdas/${numero_celda}`, {
