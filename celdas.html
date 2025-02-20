@@ -247,6 +247,7 @@
 
             // Función para editar una celda
             function editarCelda(numero_celda) {
+                document.getElementById("formCelda").reset();
                 fetch(`https://arkham-tp-introcamejo.onrender.com/api/v1/celdas/${numero_celda}`)
                     .then((response) => response.json())
                     .then((celda) => {
