@@ -129,11 +129,15 @@
                 .then((celdas) => {
                     let select = document.getElementById("celdas");
                     celdas.forEach((celda) => {
-                        let option = document.createElement("option");
-                        option.value = celda.numero_celda; // El ID del personal será el valor
-                        option.textContent = `celda N°: ${celda.numero_celda}`; // Muestra el ID y el nombre
-                        select.appendChild(option);
-                    }); // Agrega la opción al select
+                        if (celda.capacidad > celda.ocupacion) {
+                            let option = document.createElement("option");
+                            option.value = celda.numero_celda; // El ID del personal será el valor
+                            option.textContent = `Celda N°: ${celda.numero_celda} (Capacidad disponible: ${celda.capacidad - celda.ocupacion})`;
+                            select.appendChild(option);
+
+                        }
+            
+                    });
                 });
         </script>
     </body>
