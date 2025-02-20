@@ -193,6 +193,7 @@
                 .then((response) => response.json())
                 .then((personal) => {
                     let select = document.getElementById("personal_asignado");
+                    select.innerHTML = '';
                     personal.forEach((persona) => {
                         console.log(persona);
                         let option = document.createElement("option");
@@ -207,6 +208,7 @@
                     .then((response) => response.json())
                     .then((celdas) => {
                         let select = document.getElementById("celdas");
+                        select.innerHTML = '';
                         celdas.forEach((celda) => {
                             let option = document.createElement("option");
                             option.value = celda.numero_celda;
