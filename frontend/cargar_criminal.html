@@ -127,21 +127,13 @@
             fetch("https://arkham-tp-introcamejo.onrender.com/api/v1/celdas")
                 .then((response) => response.json())
                 .then((celdas) => {
-                    const celdasDisponibles = celdas.filter(celda => celda.disponible === true);
                     let select = document.getElementById("celdas");
-                    if (celdasDisponibles.length === 0) {
-                        select.disabled = true;
+                    celdas.forEach((celda) => {
                         let option = document.createElement("option");
-                        option.textContent = "No hay celdas disponibles";
+                        option.value = celda.numero_celda; // El ID del personal será el valor
+                        option.textContent = `celda N°: ${celda.numero_celda}`; // Muestra el ID y el nombre
                         select.appendChild(option);
-                    } else {
-                        celdasDisponibles.forEach((celda) => {
-                            let option = document.createElement("option");
-                            option.value = celda.numero_celda;
-                            option.textContent = `Celda N°: ${celda.numero_celda}`;
-                            select.appendChild(option);
-                        });
-                    }
+                    }); // Agrega la opción al select
                 });
         </script>
     </body>
