@@ -72,7 +72,7 @@
                     <select name="personal_asignado" id="personal_asignado" required></select><br />
 
                     <label for="celda">Celda:</label>
-                    <select name="celda" id="celda" required></select><br />
+                    <select name="celdas" id="celdas" required></select><br />
 
                     <label for="foto">Foto:</label>
                     <input type="text" name="foto" id="foto" required /><br />
@@ -186,7 +186,7 @@
                 document.getElementById("genero").value = criminal.genero;
                 document.getElementById("peligrosidad").value = criminal.peligrosidad;
                 document.getElementById("personal_asignado").value = criminal.personal_asignado;
-                document.getElementById("celda").value = criminal.celda;
+                document.getElementById("celdas").value = criminal.celda;
                 document.getElementById("foto").value = criminal.foto;
                 
                 fetch("https://arkham-tp-introcamejo.onrender.com/api/v1/personal")
@@ -213,6 +213,9 @@
                             let option = document.createElement("option");
                             option.value = celda.numero_celda;
                             option.textContent = `Celda N°: ${celda.numero_celda} (Ocupados: ${celda._count.criminales} / ${celda.capacidad})`;
+                            if (celda.numero_celda === criminal.celda) {
+                                option.selected = true;
+                            }
                             select.appendChild(option);
                         });
                     })
