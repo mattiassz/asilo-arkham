@@ -69,10 +69,10 @@
                     <input type="text" name="peligrosidad" id="peligrosidad" required /><br />
 
                     <label for="personal_asignado">Personal Asignado:</label>
-                    <input type="text" name="personal_asignado" id="personal_asignado" required /><br />
+                    <select name="personal_asignado" id="personal_asignado" required></select><br />
 
                     <label for="celda">Celda:</label>
-                    <input type="text" name="celda" id="celda" required /><br />
+                    <select name="celda" id="celda" required></select><br />
 
                     <label for="foto">Foto:</label>
                     <input type="text" name="foto" id="foto" required /><br />
@@ -206,7 +206,7 @@
                 fetch("https://arkham-tp-introcamejo.onrender.com/api/v1/celdas")
                 .then((response) => response.json())
                 .then((celdas) => {
-                    let select = document.getElementById("celdas");
+                    let select = document.getElementById("celda");
                     celdas.forEach((celda) => {
                         console.log(celda);
                         let option = document.createElement("option");
