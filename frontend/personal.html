@@ -114,6 +114,7 @@
                 fetch("https://arkham-tp-introcamejo.onrender.com/api/v1/personal")
                     .then((response) => response.json())
                     .then((personal) => {
+                        personal.sort((a, b) => a.dni - b.dni);
                         let tabla = document.getElementById("personal-data");
                         tabla.innerHTML = ""; // Limpiar la tabla antes de actualizar
                         personal.forEach((laburante) => {
