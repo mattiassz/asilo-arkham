@@ -173,7 +173,7 @@
                             numero_celda.textContent = celda.numero_celda;
 
                             let criminalesAsociados = document.createElement('td');
-                            fetch(`https://arkham-tp-introcamejo.onrender.com/api/v1/celdas/${celda.id}/criminales`)
+                            fetch(`https://arkham-tp-introcamejo.onrender.com/api/v1/celdas/${parseInt(celda.numero_celda)}/criminales`)
                                 .then(response => response.json())
                                 .then(data => {
                                     if (data.length > 0) {
