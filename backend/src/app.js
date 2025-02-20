@@ -503,6 +503,30 @@ app.post('/api/v1/celdas', async (req,res)=>{
 })
 
 
+app.get('/api/v1/celdas/disponibles', async (req, res) => {
+    try {
+        const celdasDisponibles = await prisma.celda.findMany({
+            select: {
+                numero_celda: true,
+                capacidad: true,
+                _count: {
+                    select: { criminales: true }
+                }
+            }
+        });
+
+        const celdasConEspacio = celdasDisponibles.filter(celda => celda._count.criminales < celda.capacidad);
+
+        res.send(celdasConEspacio);
+    } catch (error) {
+        console.error('Error obteniendo celdas disponibles:', error);
+        res.status(500).send({ error: 'Error interno del servidor' });
+    }
+});
+
+
+
+
 
 
 app.get('/api/v1/celdas/:numero_celda/criminales', async (req, res) => {
@@ -526,27 +550,6 @@ app.get('/api/v1/celdas/:numero_celda/criminales', async (req, res) => {
 });
 
 
-
-app.get('/api/v1/celdas/disponibles', async (req, res) => {
-    try {
-        const celdasDisponibles = await prisma.celda.findMany({
-            select: {
-                numero_celda: true,
-                capacidad: true,
-                _count: {
-                    select: { criminales: true }
-                }
-            }
-        });
-
-        const celdasConEspacio = celdasDisponibles.filter(celda => celda._count.criminales < celda.capacidad);
-
-        res.send(celdasConEspacio);
-    } catch (error) {
-        console.error('Error obteniendo celdas disponibles:', error);
-        res.status(500).send({ error: 'Error interno del servidor' });
-    }
-});
 
 
 
