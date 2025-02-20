@@ -70,10 +70,7 @@ app.post('/api/v1/criminales', async (req, res) => {
         return
     }
 
-    if (celda.ocupacion >= celda.capacidad) {
-        res.status(400).send({ error: 'La celda está llena' });
-        return;
-    }
+
 
     const criminal = await prisma.criminal.create({
         data: {
@@ -86,15 +83,6 @@ app.post('/api/v1/criminales', async (req, res) => {
             personal_asignado: req.body.personal_asignado,
             celda: req.body.celda,
             foto: req.body.foto
-        }
-    })
-
-    await prisma.celda.update({
-        where: {
-            numero_celda: parseInt(req.body.celda)
-        },
-        data: {
-            ocupacion: celda.ocupacion + 1
         }
     })
 
