@@ -206,7 +206,7 @@
                 fetch("https://arkham-tp-introcamejo.onrender.com/api/v1/celdas/disponibles") 
                     .then((response) => response.json())
                     .then((celdas) => {
-                        let select = document.getElementById("celda");
+                        let select = document.getElementById("celdas");
                         select.innerHTML = ""; // Limpia las opciones anteriores
 
                         celdas.forEach((celda) => {
