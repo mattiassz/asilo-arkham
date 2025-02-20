@@ -422,20 +422,15 @@ app.get('/api/v1/celdas', async (req, res)=>{
 
 app.get('/api/v1/celdas/disponibles', async (req, res) => {
     try {
-        
         const celdasDisponibles = await prisma.celda.findMany({
             select: {
                 numero_celda: true,
                 capacidad: true,
                 _count: { select: { criminales: true } }
-            },
-            where: {
-                _count: {
-                    criminales: { lt: prisma.celda.capacidad }
-                }
             }
         });
         
+        // Filtra las celdas que tienen espacio disponible
         const celdasConEspacio = celdasDisponibles.filter(celda => celda._count.criminales < celda.capacidad);
 
         res.send(celdasConEspacio);
@@ -444,6 +439,7 @@ app.get('/api/v1/celdas/disponibles', async (req, res) => {
         res.status(500).send({ error: 'Error interno del servidor' });
     }
 });
+
 
 
 
